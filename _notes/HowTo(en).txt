@@ -1,0 +1,50 @@
+Import method
+1. 1. Log in to Umanity
+2. 2. Go to the forecast registration page
+https://umanity.jp/coliseum/registration_list2.php
+3. 3. Since it is possible to import files, (register.png)
+Import the csv file created in the specified format
+* Since general users cannot import files, it is necessary to set the user ID on the Umanity side.
+
+
+There are two types of files to import: (1) comment and (2) buy.
+① sample_comment.csv
+② sample_data.csv
+
+((Note) Be sure to enclose the character string with "" ".)
+
+/** comment */
+1, Race ID, Date R (16 digits)
+2, Mark of horse number 1, ◎ ○ ▲ △ ×
+(Note) ◎ is required. ◎ ○ ▲ is one race.
+3, comment of horse number 1
+~
+36, Mark of horse number 18
+37, comment of horse number 18
+38, Race Comments
+(Note) Output the escape sequence (\\ n) for line breaks in the text.
+39, number of gold, 50-5000
+40, Confirmation flag, 0 or 1 (* Once confirmed, it cannot be changed)
+41, Race flag, 0 or 1
+
+
+/ ** Buy eyes * /
+1, Race ID, Date R (16 digits)
+2, By formula, (1) Win (2) Double win (3) Frame ream (4) Maren (5) Wide (6) Horse single (7) Triple double (8) Triple single
+3, Method, (1) Normal (2) Formation (3) Box (4) Nagashi
+4, Nagashi, (0) Unspecified (1) 1st (2) 2nd (3) 3rd (4) 1 axis (5) 2nd axis (6) 1st and 2nd (7) 1st and 3rd (8) 2nd and 3rd
+(Note) Specify only when the method is long. The effective combination of formula, method, and length is based on PAT.
+5, multi, 0 or 1
+6, Buy eyes 1, Binary 18 digits
+7, Buy eyes 2, Same as above
+8, Buy eyes 3, Same as above
+(Note) Set 1 for the applicable horse number. In some cases, the opponent always uses the buy eye 3 and does not use the buy eye 2.
+9, amount, 1-100
+(Note) Amount per item. 100 yen unit.
+
+2010061305030801 - eg 
+2022052204010601
+2022                - year
+    05              - month
+      22            - day
+        4010601     - RaceID    (Niigata R1 22 May 22)
