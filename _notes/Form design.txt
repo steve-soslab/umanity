@@ -1,0 +1,9 @@
+Field 1. Race ID, Date R (16 digits)	
+Field 2. By formula, (1) Win (2) Double win (3) Frame ream (4) Maren (5) Wide (6) Horse single (7) Triple double (8) Triple single	
+Field 3 Method, (1) Normal (2) Formation (3) Box (4) Nagashi	
+Field 4 Nagashi, (0) Unspecified (1) 1st (2) 2nd (3) 3rd (4) 1 axis (5) 2nd axis (6) 1st and 2nd (7) 1st and 3rd (8) 2nd and 3rd (Note) Specify only when the method is long. The effective combination of formula, method, and length is based on PAT."	
+Field 5 multi, 0 or 1	
+Field 6 Buy eyes 1, Binary 18 digits	
+Field 7 Buy eyes 2, Same as above	
+Field 8 "Buy eyes 3, Same as above (Note) Set 1 for the applicable horse number. In some cases, the opponent always uses the buy eye 3 and does not use the buy eye 2."	
+Field 9 amount, 1-100
