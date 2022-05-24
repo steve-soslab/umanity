@@ -5,7 +5,7 @@ export interface Tip {
     nagoshi: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |8;
     multi: 0 | 1;
     First: String;
-    Second: string;
-    Third: string;
+    Second: String;
+    Third: String;
     amount: number;
 }
