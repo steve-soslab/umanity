@@ -2,8 +2,8 @@
   "resourceName": "umanitydb",
   "tableName": "umanitydb",
   "partitionKey": {
-    "fieldName": "RaceID",
-    "fieldType": "string"
+    "fieldName": "UUID",
+    "fieldType": "number"
   },
   "gsi": [],
   "triggerFunctions": []
