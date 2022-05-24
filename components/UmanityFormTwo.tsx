@@ -15,9 +15,14 @@ import { Tip } from "../types/tips";
 type UmanityFormTwoProps = {
   tip: Tip;
   setTip: (data: Tip) => void;
+  createTipHandler: () => void;
 };
 
-const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({ tip, setTip }) => {
+const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
+  tip,
+  setTip,
+  createTipHandler,
+}) => {
   const handleFirstChange = (event: SelectChangeEvent) => {
     setTip({ ...tip, First: event.target.value });
   };
@@ -134,7 +139,9 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({ tip, setTip }) => {
         onChange={(e) => setTip({ ...tip, amount: JSON.parse(e.target.value) })}
         fullWidth
       />
-      <Button variant="contained">SUBMIT</Button>
+      <Button onClick={createTipHandler} variant="contained">
+        SUBMIT
+      </Button>
     </Paper>
   );
 };

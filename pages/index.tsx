@@ -12,6 +12,23 @@ import { Tip } from "../types/tips";
 export default function Home() {
   const newTip = emptyTip();
   const [tip, setTip] = useState<Tip>(newTip);
+
+  const createTipHandler = async () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var raw = JSON.stringify(tip);
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+    };
+
+    const data = await fetch("/api/createTip", requestOptions);
+    const res = await data.json();
+    console.log(res);
+  };
+
   return (
     <div>
       <Head>
@@ -22,7 +39,11 @@ export default function Home() {
       <TopNavBar />
       <div className="form--Wrapper">
         <UmanityForm tip={tip} setTip={setTip} />
-        <UmanityFormTwo tip={tip} setTip={setTip} />
+        <UmanityFormTwo
+          createTipHandler={createTipHandler}
+          tip={tip}
+          setTip={setTip}
+        />
       </div>
     </div>
   );
