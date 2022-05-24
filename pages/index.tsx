@@ -61,7 +61,7 @@ export default function Home() {
     for (let i = 0; i < prevTips.length; i++) {
       CSV += generateCsv(prevTips[i]);
     }
-    console.log(CSV);
+
     var encodedUri = encodeURI(CSV);
     var link = document.createElement("a");
     link.setAttribute("href", "data:text/csv;charset=utf-8," + encodedUri);
