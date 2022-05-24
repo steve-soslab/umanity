@@ -5,6 +5,7 @@ import Image from "next/image";
 import TopNavBar from "../components/TopNavBar";
 import UmanityForm from "../components/UmanityForm";
 import UmanityFormTwo from "../components/UmanityFormTwo";
+import TipsTable from "../components/TipsTable";
 
 import { emptyTip } from "../lib/emptyTip";
 import { Tip } from "../types/tips";
@@ -12,6 +13,7 @@ import { Tip } from "../types/tips";
 export default function Home() {
   const newTip = emptyTip();
   const [tip, setTip] = useState<Tip>(newTip);
+  const [prevTips, setPrevTips] = useState([]);
 
   const createTipHandler = async () => {
     var myHeaders = new Headers();
@@ -27,8 +29,18 @@ export default function Home() {
 
     const data = await fetch("/api/createTip", requestOptions);
     const res = await data.json();
-    console.log(res);
+    await readTipsListHandler();
   };
+
+  const readTipsListHandler = async () => {
+    const data = await fetch("/api/readDatabaseEntries");
+    const res = await data.json();
+    setPrevTips(res);
+  };
+
+  React.useEffect(() => {
+    readTipsListHandler();
+  }, []);
 
   return (
     <div>
@@ -46,6 +58,7 @@ export default function Home() {
           setTip={setTip}
         />
       </div>
+      <TipsTable prevTips={prevTips} />
     </div>
   );
 }
