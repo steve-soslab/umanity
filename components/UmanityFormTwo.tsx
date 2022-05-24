@@ -136,8 +136,11 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
         className="form--fields"
         label="Amount"
         value={tip.amount}
-        onChange={(e) => setTip({ ...tip, amount: JSON.parse(e.target.value) })}
+        onChange={(e) => {
+          setTip({ ...tip, amount: parseInt(e.target.value) });
+        }}
         fullWidth
+        type="number"
       />
       <Button onClick={createTipHandler} variant="contained">
         SUBMIT
