@@ -14,6 +14,7 @@ export default async function handler(
 
     const tip: Tip = req.body;
     const docClient = new AWS.DynamoDB.DocumentClient();
+    const dynamoAccountTable = `umanitydb-${process.env.USER_BRANCH}`;
     const params = {
         TableName: "tips",
         Item: tip,
