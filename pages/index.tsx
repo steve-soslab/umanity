@@ -36,6 +36,7 @@ export default function Home() {
     const data = await fetch("/api/readDatabaseEntries");
     const res = await data.json();
     setPrevTips(res);
+    console.log(res);
   };
 
   React.useEffect(() => {

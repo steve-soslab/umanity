@@ -44,4 +44,9 @@ a {
 }
 .table--wrapper table {
   width: 100%;
+  border-collapse: collapse;
+}
+.tableRow {
+  border-bottom: 1px solid black;
+  text-align: center;
 }

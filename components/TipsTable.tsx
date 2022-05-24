@@ -1,5 +1,6 @@
 import React from "react";
 import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
 import { Tip } from "../types/tips";
 
 type TipsList = {
@@ -8,7 +9,7 @@ type TipsList = {
 
 const TipsTable: React.FC<TipsList> = ({ prevTips }) => {
   const listOfTips = prevTips.map((data) => (
-    <tr key={data.UUID}>
+    <tr className="tableRow" key={data.UUID}>
       <td>{data.RaceID}</td>
       <td>{data.formula}</td>
       <td>{data.method}</td>
@@ -39,6 +40,17 @@ const TipsTable: React.FC<TipsList> = ({ prevTips }) => {
         </thead>
         <tbody>{listOfTips}</tbody>
       </table>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          gap: "20px",
+          marginTop: "20px",
+        }}
+      >
+        <Button variant="contained">DOWNLOAD</Button>
+        <Button variant="contained">CLEAR</Button>
+      </div>
     </Paper>
   );
 };
