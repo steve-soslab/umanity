@@ -2,6 +2,7 @@ import { Tip } from "../types/tips";
 
 export const emptyTip = () => {
   const newTip: Tip = {
+    UUID: new Date().getTime(),
     RaceID: "",
     formula: 1,
     method: 1,
