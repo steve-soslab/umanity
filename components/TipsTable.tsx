@@ -2,12 +2,20 @@ import React from "react";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { Tip } from "../types/tips";
+import { loadingState } from "../types/loading";
+import CircularProgress from "@mui/material/CircularProgress";
 
 type TipsList = {
   prevTips: Tip[];
+  deleteTipsHandler: () => void;
+  loading: loadingState;
 };
 
-const TipsTable: React.FC<TipsList> = ({ prevTips }) => {
+const TipsTable: React.FC<TipsList> = ({
+  prevTips,
+  deleteTipsHandler,
+  loading,
+}) => {
   const listOfTips = prevTips.map((data) => (
     <tr className="tableRow" key={data.UUID}>
       <td>{data.RaceID}</td>
@@ -49,7 +57,15 @@ const TipsTable: React.FC<TipsList> = ({ prevTips }) => {
         }}
       >
         <Button variant="contained">DOWNLOAD</Button>
-        <Button variant="contained">CLEAR</Button>
+        {loading.clear ? (
+          <Button variant="outlined">
+            <CircularProgress size="1.5rem" />
+          </Button>
+        ) : (
+          <Button onClick={deleteTipsHandler} variant="contained">
+            CLEAR
+          </Button>
+        )}
       </div>
     </Paper>
   );

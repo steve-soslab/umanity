@@ -9,6 +9,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import { loadingState } from "../types/loading";
 
 import { Tip } from "../types/tips";
 
@@ -16,12 +18,14 @@ type UmanityFormTwoProps = {
   tip: Tip;
   setTip: (data: Tip) => void;
   createTipHandler: () => void;
+  loading: loadingState;
 };
 
 const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
   tip,
   setTip,
   createTipHandler,
+  loading,
 }) => {
   const handleFirstChange = (event: SelectChangeEvent) => {
     setTip({ ...tip, First: event.target.value });
@@ -142,9 +146,15 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
         fullWidth
         type="number"
       />
-      <Button onClick={createTipHandler} variant="contained">
-        SUBMIT
-      </Button>
+      {loading.submit ? (
+        <Button variant="outlined">
+          <CircularProgress size="1.5rem" />
+        </Button>
+      ) : (
+        <Button onClick={createTipHandler} variant="contained">
+          SUBMIT
+        </Button>
+      )}
     </Paper>
   );
 };

@@ -9,16 +9,23 @@ import TipsTable from "../components/TipsTable";
 
 import { emptyTip } from "../lib/emptyTip";
 import { Tip } from "../types/tips";
+import { loadingState } from "../types/loading";
 
 export default function Home() {
   const newTip = emptyTip();
   const [tip, setTip] = useState<Tip>(newTip);
   const [prevTips, setPrevTips] = useState([]);
+  const [loading, setLoading] = useState<loadingState>({
+    submit: false,
+    download: false,
+    clear: false,
+  });
 
   const createTipHandler = async () => {
+    setLoading({ ...loading, submit: true });
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    console.log(tip);
+
     var raw = JSON.stringify(tip);
 
     var requestOptions = {
@@ -30,13 +37,22 @@ export default function Home() {
     const data = await fetch("/api/createTip", requestOptions);
     const res = await data.json();
     await readTipsListHandler();
+    setLoading({ ...loading, submit: false });
+  };
+
+  const deleteTipsHandler = async () => {
+    setLoading({ ...loading, clear: true });
+    const d = await fetch("/api/deleteDatabaseEntries");
+    const res = await d.json();
+
+    await readTipsListHandler();
+    setLoading({ ...loading, clear: false });
   };
 
   const readTipsListHandler = async () => {
     const data = await fetch("/api/readDatabaseEntries");
     const res = await data.json();
     setPrevTips(res);
-    console.log(res);
   };
 
   React.useEffect(() => {
@@ -54,12 +70,17 @@ export default function Home() {
       <div className="form--Wrapper">
         <UmanityForm tip={tip} setTip={setTip} />
         <UmanityFormTwo
+          loading={loading}
           createTipHandler={createTipHandler}
           tip={tip}
           setTip={setTip}
         />
       </div>
-      <TipsTable prevTips={prevTips} />
+      <TipsTable
+        loading={loading}
+        deleteTipsHandler={deleteTipsHandler}
+        prevTips={prevTips}
+      />
     </div>
   );
 }
