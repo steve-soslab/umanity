@@ -16,6 +16,7 @@ export default function Home() {
   const createTipHandler = async () => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+    console.log(tip);
     var raw = JSON.stringify(tip);
 
     var requestOptions = {
