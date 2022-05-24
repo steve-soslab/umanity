@@ -8,6 +8,7 @@ import UmanityFormTwo from "../components/UmanityFormTwo";
 import TipsTable from "../components/TipsTable";
 
 import { emptyTip } from "../lib/emptyTip";
+import generateCsv from "../lib/generateCsv";
 import { Tip } from "../types/tips";
 import { loadingState } from "../types/loading";
 
@@ -26,7 +27,7 @@ export default function Home() {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify(tip);
+    var raw = JSON.stringify({ ...tip, UUID: new Date().getTime() });
 
     var requestOptions = {
       method: "POST",
@@ -55,6 +56,21 @@ export default function Home() {
     setPrevTips(res);
   };
 
+  const downloadCsvHandler = () => {
+    let CSV = "";
+    for (let i = 0; i < prevTips.length; i++) {
+      CSV += generateCsv(prevTips[i]);
+    }
+    console.log(CSV);
+    var encodedUri = encodeURI(CSV);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "my_data.csv");
+    document.body.appendChild(link); // Required for FF
+
+    link.click(); // This wil
+  };
+
   React.useEffect(() => {
     readTipsListHandler();
   }, []);
@@ -80,6 +96,7 @@ export default function Home() {
         loading={loading}
         deleteTipsHandler={deleteTipsHandler}
         prevTips={prevTips}
+        downloadCsvHandler={downloadCsvHandler}
       />
     </div>
   );

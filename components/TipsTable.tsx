@@ -9,12 +9,14 @@ type TipsList = {
   prevTips: Tip[];
   deleteTipsHandler: () => void;
   loading: loadingState;
+  downloadCsvHandler: () => void;
 };
 
 const TipsTable: React.FC<TipsList> = ({
   prevTips,
   deleteTipsHandler,
   loading,
+  downloadCsvHandler,
 }) => {
   const listOfTips = prevTips.map((data) => (
     <tr className="tableRow" key={data.UUID}>
@@ -56,7 +58,9 @@ const TipsTable: React.FC<TipsList> = ({
           marginTop: "20px",
         }}
       >
-        <Button variant="contained">DOWNLOAD</Button>
+        <Button onClick={downloadCsvHandler} variant="contained">
+          DOWNLOAD
+        </Button>
         {loading.clear ? (
           <Button variant="outlined">
             <CircularProgress size="1.5rem" />
