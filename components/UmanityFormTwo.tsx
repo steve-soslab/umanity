@@ -52,7 +52,7 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
           label="Multi"
         />
       </FormGroup>
-      <FormControl className="form--fields" fullWidth>
+      <FormControl sx={{ mb: 2 }} fullWidth>
         <InputLabel id="1st Place">1st Place</InputLabel>
         <Select
           labelId="1st Place"
@@ -80,7 +80,7 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
           <MenuItem value={"000000000000000001"}>RUNNER 18</MenuItem>
         </Select>
       </FormControl>
-      <FormControl className="form--fields" fullWidth>
+      <FormControl sx={{ mb: 2 }} fullWidth>
         <InputLabel id="2nd Place">2nd Place</InputLabel>
         <Select
           labelId="2nd Place"
@@ -108,7 +108,7 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
           <MenuItem value={"000000000000000001"}>RUNNER 18</MenuItem>
         </Select>
       </FormControl>
-      <FormControl className="form--fields" fullWidth>
+      <FormControl sx={{ mb: 2 }} fullWidth>
         <InputLabel id="3rd Place">3rd Place</InputLabel>
         <Select
           labelId="3rd Place"
@@ -137,8 +137,8 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
         </Select>
       </FormControl>
       <TextField
-        className="form--fields"
-        label="Amount"
+        sx={{ mb: 2 }}
+        label="Stake"
         value={tip.amount}
         onChange={(e) => {
           setTip({ ...tip, amount: parseInt(e.target.value) });
