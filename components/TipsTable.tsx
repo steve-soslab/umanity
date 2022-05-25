@@ -63,7 +63,7 @@ const TipsTable: React.FC<TipsList> = ({
         <thead>
           <tr>
             <th>Race ID</th>
-            <th>Formula</th>
+            <th>Bet Type</th>
             <th>Method</th>
             <th>Nagashi</th>
             <th>Multi</th>
