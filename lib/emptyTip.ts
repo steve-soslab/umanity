@@ -8,9 +8,9 @@ export const emptyTip = () => {
     method: 1,
     nagoshi: 0,
     multi: 0,
-    First: "100000000000000000",
-    Second: "100000000000000000",
-    Third: "100000000000000000",
+    First: "000000000000000000",
+    Second: "000000000000000000",
+    Third: "000000000000000000",
     amount: 0,
   };
   return newTip;

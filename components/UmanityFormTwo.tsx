@@ -60,6 +60,7 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
           label="1st Place"
           onChange={handleFirstChange}
         >
+          <MenuItem value={"000000000000000000"}>NO CHOICE</MenuItem>
           <MenuItem value={"100000000000000000"}>RUNNER 1</MenuItem>
           <MenuItem value={"010000000000000000"}>RUNNER 2</MenuItem>
           <MenuItem value={"001000000000000000"}>RUNNER 3</MenuItem>
@@ -88,6 +89,7 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
           label="2nd Place"
           onChange={handleSecondChange}
         >
+          <MenuItem value={"000000000000000000"}>NO CHOICE</MenuItem>
           <MenuItem value={"100000000000000000"}>RUNNER 1</MenuItem>
           <MenuItem value={"010000000000000000"}>RUNNER 2</MenuItem>
           <MenuItem value={"001000000000000000"}>RUNNER 3</MenuItem>
@@ -116,6 +118,7 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
           label="3rd Place"
           onChange={handleThirdChange}
         >
+          <MenuItem value={"000000000000000000"}>NO CHOICE</MenuItem>
           <MenuItem value={"100000000000000000"}>RUNNER 1</MenuItem>
           <MenuItem value={"010000000000000000"}>RUNNER 2</MenuItem>
           <MenuItem value={"001000000000000000"}>RUNNER 3</MenuItem>

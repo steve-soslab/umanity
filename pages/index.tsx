@@ -110,6 +110,7 @@ export default function Home() {
         deleteTipsHandler={deleteTipsHandler}
         prevTips={prevTips}
         downloadCsvHandler={downloadCsvHandler}
+        readTipsListHandler={readTipsListHandler}
       />
     </div>
   );
