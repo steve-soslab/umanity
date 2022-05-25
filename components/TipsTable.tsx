@@ -70,7 +70,7 @@ const TipsTable: React.FC<TipsList> = ({
             <th>1st</th>
             <th>2nd</th>
             <th>3rd</th>
-            <th>Stake</th>
+            <th>Stake ¥</th>
             <th>DELETE</th>
           </tr>
         </thead>
