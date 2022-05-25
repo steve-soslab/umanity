@@ -6,7 +6,7 @@ export const emptyTip = () => {
     RaceID: "",
     formula: 1,
     method: 1,
-    nagoshi: 0,
+    banker: 0,
     multi: 0,
     First: "000000000000000000",
     Second: "000000000000000000",

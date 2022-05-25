@@ -48,3 +48,16 @@ a {
   border-bottom: 1px solid black;
   text-align: center;
 }
+
+.login-component {
+  width: 500px;
+  margin: 10% auto;
+  padding: 30px 30px;
+
+}
+.login-component h2 {
+  text-align: center;
+  margin: 0 0 20px 0;
+  color: #081230;
+  text-transform: uppercase;
+}

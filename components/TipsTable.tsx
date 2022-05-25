@@ -45,7 +45,7 @@ const TipsTable: React.FC<TipsList> = ({
         <td>{data.RaceID}</td>
         <td>{data.formula}</td>
         <td>{data.method}</td>
-        <td>{data.nagoshi}</td>
+        <td>{data.banker}</td>
         <td>{data.multi}</td>
         <td>{data.First}</td>
         <td>{data.Second}</td>
@@ -61,7 +61,7 @@ const TipsTable: React.FC<TipsList> = ({
   });
   return (
     <Paper className="table--wrapper">
-      <h4>Previous Entries</h4>
+      <h4>Tips | Strategy</h4>
       <table>
         <thead>
           <tr>

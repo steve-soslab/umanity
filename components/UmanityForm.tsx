@@ -22,7 +22,7 @@ const UmanityForm: FC<UmanityFormProps> = ({ tip, setTip, error }) => {
     setTip({ ...tip, method: JSON.parse(event.target.value) });
   };
   const handleNagashiChange = (event: SelectChangeEvent) => {
-    setTip({ ...tip, nagoshi: JSON.parse(event.target.value) });
+    setTip({ ...tip, banker: JSON.parse(event.target.value) });
   };
   return (
     <Paper className="form">
@@ -48,13 +48,13 @@ const UmanityForm: FC<UmanityFormProps> = ({ tip, setTip, error }) => {
           onChange={handleFormulaChange}
         >
           <MenuItem value={1}>WIN</MenuItem>
-          <MenuItem value={2}>DOUBLE WIN</MenuItem>
-          <MenuItem value={3}>FRAME REAM</MenuItem>
-          <MenuItem value={4}>MAREN</MenuItem>
-          <MenuItem value={5}>WIDE</MenuItem>
-          <MenuItem value={6}>HOURSE SINGLE</MenuItem>
-          <MenuItem value={7}>TRIPLE DOUBLE</MenuItem>
-          <MenuItem value={8}>TRIPLE SINGLE</MenuItem>
+          <MenuItem value={2}>PLACE</MenuItem>
+          <MenuItem value={3}>BRACKET QUINELLA</MenuItem>
+          <MenuItem value={4}>QUINELLA</MenuItem>
+          <MenuItem value={5}>QUINELLA PLACE</MenuItem>
+          <MenuItem value={6}>EXACTA</MenuItem>
+          <MenuItem value={7}>TRIO</MenuItem>
+          <MenuItem value={8}>TRIFECTA</MenuItem>
         </Select>
       </FormControl>
       <FormControl sx={{ mb: 2 }} fullWidth>
@@ -68,18 +68,18 @@ const UmanityForm: FC<UmanityFormProps> = ({ tip, setTip, error }) => {
           <MenuItem value={1}>NORMAL</MenuItem>
           <MenuItem value={2}>FORMATION</MenuItem>
           <MenuItem value={3}>BOX</MenuItem>
-          <MenuItem value={4}>NAGASHI</MenuItem>
+          <MenuItem value={4}>BANKER</MenuItem>
         </Select>
       </FormControl>
       <FormControl fullWidth>
-        <InputLabel id="Nagashi">Nagashi</InputLabel>
+        <InputLabel id="Nagashi">Banker</InputLabel>
         <Select
           labelId="Nagashi"
-          value={JSON.stringify(tip.nagoshi)}
+          value={JSON.stringify(tip.banker)}
           label="Nagashi"
           onChange={handleNagashiChange}
         >
-          <MenuItem value={0}>UNSPECIFIED</MenuItem>
+          <MenuItem value={0}>-</MenuItem>
           <MenuItem value={1}>1st</MenuItem>
           <MenuItem value={2}>2nd</MenuItem>
           <MenuItem value={3}>3rd</MenuItem>

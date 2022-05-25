@@ -7,6 +7,7 @@ import UmanityForm from "../components/UmanityForm";
 import UmanityFormTwo from "../components/UmanityFormTwo";
 import TipsTable from "../components/TipsTable";
 import generateDate from "../lib/generateDate";
+import LoginComponent from "../components/LoginComponent";
 
 import { emptyTip } from "../lib/emptyTip";
 import generateCsv from "../lib/generateCsv";
@@ -15,7 +16,12 @@ import { loadingState } from "../types/loading";
 import { error } from "../types/error";
 import blankError from "../lib/blankError";
 
-export default function Home() {
+import Amplify, { Auth } from "aws-amplify";
+import awsconfig from "../src/aws-exports";
+import "@aws-amplify/ui-react/styles.css";
+Amplify.configure(awsconfig);
+
+const Home = () => {
   const newDate = generateDate();
   const newTip = emptyTip();
   const emptyError = blankError();
@@ -27,6 +33,7 @@ export default function Home() {
     download: false,
     clear: false,
   });
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
   const createTipHandler = async () => {
     setError({ ...error, submit: false });
@@ -68,7 +75,11 @@ export default function Home() {
   const readTipsListHandler = async () => {
     const data = await fetch("/api/readDatabaseEntries");
     const res = await data.json();
-    setPrevTips(res);
+    if (Array.isArray(res)) {
+      return setPrevTips(res);
+    } else {
+      return setPrevTips([]);
+    }
   };
 
   const downloadCsvHandler = () => {
@@ -86,7 +97,14 @@ export default function Home() {
     link.click(); // This wil
   };
 
+  const checkUser = async () => {
+    const { attributes } = await Auth.currentAuthenticatedUser();
+    if (attributes) {
+      return setLoggedIn(true);
+    }
+  };
   React.useEffect(() => {
+    checkUser();
     readTipsListHandler();
   }, []);
 
@@ -94,32 +112,38 @@ export default function Home() {
     setError({ ...error, raceId_formValidation: false });
   }, [tip.RaceID]);
 
-  return (
-    <div>
-      <Head>
-        <title>RACELAB | Umanity</title>
-        <meta name="description" content="RACELAB tipping site for Umanity" />
-        <link rel="icon" href="/BETIA_logo_file.png" />
-      </Head>
-      <TopNavBar />
-      <div className="form--Wrapper">
-        <UmanityForm error={error} tip={tip} setTip={setTip} />
-        <UmanityFormTwo
-          loading={loading}
-          createTipHandler={createTipHandler}
-          tip={tip}
-          setTip={setTip}
+  if (!loggedIn) {
+    return (
+      <div>
+        <Head>
+          <title>RACELAB | Umanity</title>
+          <meta name="description" content="RACELAB tipping site for Umanity" />
+          <link rel="icon" href="https://rlab.racelab.global/favicon.ico" />
+        </Head>
+        <TopNavBar />
+        <div className="form--Wrapper">
+          <UmanityForm error={error} tip={tip} setTip={setTip} />
+          <UmanityFormTwo
+            loading={loading}
+            createTipHandler={createTipHandler}
+            tip={tip}
+            setTip={setTip}
+            error={error}
+          />
+        </div>
+        <TipsTable
           error={error}
+          loading={loading}
+          deleteTipsHandler={deleteTipsHandler}
+          prevTips={prevTips}
+          downloadCsvHandler={downloadCsvHandler}
+          readTipsListHandler={readTipsListHandler}
         />
       </div>
-      <TipsTable
-        error={error}
-        loading={loading}
-        deleteTipsHandler={deleteTipsHandler}
-        prevTips={prevTips}
-        downloadCsvHandler={downloadCsvHandler}
-        readTipsListHandler={readTipsListHandler}
-      />
-    </div>
-  );
-}
+    );
+  }
+
+  return <LoginComponent />;
+};
+
+export default Home;

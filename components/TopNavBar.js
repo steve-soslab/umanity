@@ -5,6 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Image from "next/image";
+import { Auth } from "aws-amplify";
 
 const TopNavBar = () => {
   return (
@@ -13,9 +14,11 @@ const TopNavBar = () => {
         <Toolbar>
           <Image height={25} width={40} src="/BETIA_logo_file.png" alt="logo" />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, ml: 3 }}>
-            RACELAB | Umanity Pro-tips
+            RACELAB | Umanity Professional Tips
           </Typography>
-          <Button color="inherit">Logout</Button>
+          <Button onClick={() => Auth.signOut()} color="inherit">
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>

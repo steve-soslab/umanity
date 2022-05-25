@@ -1,5 +1,6 @@
 import "../styles/globals.css";
-import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 const theme = createTheme({
   palette: {
     primary: {
