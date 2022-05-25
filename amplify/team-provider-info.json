@@ -10,6 +10,11 @@
       "StackName": "amplify-umanity-dev-232811",
       "StackId": "arn:aws:cloudformation:ap-southeast-2:280490410557:stack/amplify-umanity-dev-232811/5c0ae340-db65-11ec-929f-02195a2ae264",
       "AmplifyAppId": "d27nah0npn9rgj"
+    },
+    "categories": {
+      "auth": {
+        "umanityea9ad89c": {}
+      }
     }
   }
 }
