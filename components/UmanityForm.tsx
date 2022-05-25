@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { FC } from "react";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { error } from "../types/error";
+import { Tip } from "../types/tips";
 
-const UmanityForm = ({ tip, setTip }) => {
+type UmanityFormProps = {
+  error: error;
+  tip: Tip;
+  setTip: (data: Tip) => void;
+};
+
+const UmanityForm: FC<UmanityFormProps> = ({ tip, setTip, error }) => {
   const handleFormulaChange = (event: SelectChangeEvent) => {
     setTip({ ...tip, formula: JSON.parse(event.target.value) });
   };
@@ -18,15 +26,20 @@ const UmanityForm = ({ tip, setTip }) => {
   };
   return (
     <Paper className="form">
-      <h4>Enter your tips</h4>
+      <h4>Tips Input | Delivery</h4>
       <TextField
+        sx={{ mb: 2 }}
         className="form--fields"
         label="Race ID"
+        error={error.raceId_formValidation}
+        helperText={
+          error.raceId_formValidation && "Enter a Race ID in order to submit"
+        }
         value={tip.RaceID}
         onChange={(e) => setTip({ ...tip, RaceID: e.target.value })}
         fullWidth
       />
-      <FormControl className="form--fields" fullWidth>
+      <FormControl sx={{ mb: 2 }} fullWidth>
         <InputLabel id="Formula">Formula</InputLabel>
         <Select
           labelId="Formula"
@@ -44,7 +57,7 @@ const UmanityForm = ({ tip, setTip }) => {
           <MenuItem value={8}>TRIPLE SINGLE</MenuItem>
         </Select>
       </FormControl>
-      <FormControl className="form--fields" fullWidth>
+      <FormControl sx={{ mb: 2 }} fullWidth>
         <InputLabel id="Method">Method</InputLabel>
         <Select
           labelId="Method"
@@ -58,7 +71,7 @@ const UmanityForm = ({ tip, setTip }) => {
           <MenuItem value={4}>NAGASHI</MenuItem>
         </Select>
       </FormControl>
-      <FormControl className="form--fields" fullWidth>
+      <FormControl fullWidth>
         <InputLabel id="Nagashi">Nagashi</InputLabel>
         <Select
           labelId="Nagashi"
