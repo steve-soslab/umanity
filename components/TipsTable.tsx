@@ -6,6 +6,7 @@ import { loadingState } from "../types/loading";
 import CircularProgress from "@mui/material/CircularProgress";
 import ClearIcon from "@mui/icons-material/Clear";
 import IconButton from "@mui/material/IconButton";
+import { error } from "../types/error";
 
 type TipsList = {
   prevTips: Tip[];
@@ -13,6 +14,7 @@ type TipsList = {
   loading: loadingState;
   downloadCsvHandler: () => void;
   readTipsListHandler: () => void;
+  error: error;
 };
 
 const TipsTable: React.FC<TipsList> = ({
@@ -21,6 +23,7 @@ const TipsTable: React.FC<TipsList> = ({
   loading,
   downloadCsvHandler,
   readTipsListHandler,
+  error,
 }) => {
   const listOfTips = prevTips.map((data) => {
     const deleteSingleEntryHandler = async () => {
@@ -63,7 +66,7 @@ const TipsTable: React.FC<TipsList> = ({
         <thead>
           <tr>
             <th>Race ID</th>
-            <th>Formula</th>
+            <th>Bet Type</th>
             <th>Method</th>
             <th>Nagashi</th>
             <th>Multi</th>
@@ -85,7 +88,7 @@ const TipsTable: React.FC<TipsList> = ({
         }}
       >
         <Button onClick={downloadCsvHandler} variant="contained">
-          DOWNLOAD
+          GENERATE .CSV
         </Button>
         {loading.clear ? (
           <Button variant="outlined">
@@ -97,6 +100,11 @@ const TipsTable: React.FC<TipsList> = ({
           </Button>
         )}
       </div>
+      {error.download && (
+        <h6 style={{ textAlign: "end" }}>
+          Sorry there was an error, please try again later
+        </h6>
+      )}
     </Paper>
   );
 };

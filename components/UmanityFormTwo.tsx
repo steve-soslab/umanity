@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { loadingState } from "../types/loading";
 
+import { error } from "../types/error";
 import { Tip } from "../types/tips";
 
 type UmanityFormTwoProps = {
@@ -19,6 +20,7 @@ type UmanityFormTwoProps = {
   setTip: (data: Tip) => void;
   createTipHandler: () => void;
   loading: loadingState;
+  error: error;
 };
 
 const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
@@ -26,6 +28,7 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
   setTip,
   createTipHandler,
   loading,
+  error,
 }) => {
   const handleFirstChange = (event: SelectChangeEvent) => {
     setTip({ ...tip, First: event.target.value });
@@ -149,6 +152,7 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
         fullWidth
         type="number"
       />
+      {error.submit && <h6>Sorry, there was an error, please try later</h6>}
       {loading.submit ? (
         <Button variant="outlined">
           <CircularProgress size="1.5rem" />

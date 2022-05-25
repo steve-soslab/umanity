@@ -29,6 +29,7 @@ export default function Home() {
   });
 
   const createTipHandler = async () => {
+    setError({ ...error, submit: false });
     if (tip.RaceID.trim().length === 0) {
       return setError({ ...error, raceId_formValidation: true });
     }
@@ -43,11 +44,16 @@ export default function Home() {
       headers: myHeaders,
       body: raw,
     };
-
-    const data = await fetch("/api/createTip", requestOptions);
-    const res = await data.json();
-    await readTipsListHandler();
-    setLoading({ ...loading, submit: false });
+    try {
+      const data = await fetch("/api/createTip", requestOptions);
+      const res = await data.json();
+      await readTipsListHandler();
+      setLoading({ ...loading, submit: false });
+    } catch (error) {
+      console.log(error);
+      setError({ ...error, submit: true });
+      setLoading({ ...loading, submit: false });
+    }
   };
 
   const deleteTipsHandler = async () => {
@@ -103,9 +109,11 @@ export default function Home() {
           createTipHandler={createTipHandler}
           tip={tip}
           setTip={setTip}
+          error={error}
         />
       </div>
       <TipsTable
+        error={error}
         loading={loading}
         deleteTipsHandler={deleteTipsHandler}
         prevTips={prevTips}

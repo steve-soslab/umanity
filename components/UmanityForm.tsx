@@ -40,7 +40,7 @@ const UmanityForm: FC<UmanityFormProps> = ({ tip, setTip, error }) => {
         fullWidth
       />
       <FormControl sx={{ mb: 2 }} fullWidth>
-        <InputLabel id="Formula">Formula</InputLabel>
+        <InputLabel id="Formula">Bet Type</InputLabel>
         <Select
           labelId="Formula"
           value={JSON.stringify(tip.formula)}
