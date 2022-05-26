@@ -6,6 +6,7 @@ const blankError = () => {
     download: false,
     clear: false,
     raceId_formValidation: false,
+    auth: "",
   };
   return emptyError;
 };

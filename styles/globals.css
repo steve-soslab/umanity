@@ -49,10 +49,17 @@ a {
   text-align: center;
 }
 
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .login-component {
   width: 500px;
-  margin: 10% auto;
-  padding: 30px 30px;
+  padding: 30px;
 
 }
 .login-component h2 {
@@ -60,4 +67,10 @@ a {
   margin: 0 0 20px 0;
   color: #081230;
   text-transform: uppercase;
+}
+
+.error {
+  text-align: center;
+  margin: 0;
+  color: red;
 }

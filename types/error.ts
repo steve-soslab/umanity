@@ -3,4 +3,5 @@ export type error = {
   download: boolean;
   clear: boolean;
   raceId_formValidation: boolean;
+  auth: string;
 };

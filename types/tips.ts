@@ -9,4 +9,5 @@ export interface Tip {
   Second: string;
   Third: string;
   amount: number;
+  comments: string;
 }

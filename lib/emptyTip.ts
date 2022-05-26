@@ -12,6 +12,7 @@ export const emptyTip = () => {
     Second: "000000000000000000",
     Third: "000000000000000000",
     amount: 0,
+    comments: "",
   };
   return newTip;
 };

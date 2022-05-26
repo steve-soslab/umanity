@@ -11,6 +11,7 @@ import LoginComponent from "../components/LoginComponent";
 
 import { emptyTip } from "../lib/emptyTip";
 import generateCsv from "../lib/generateCsv";
+import generateComment from "../lib/generateComment";
 import { Tip } from "../types/tips";
 import { loadingState } from "../types/loading";
 import { error } from "../types/error";
@@ -82,7 +83,12 @@ const Home = () => {
     }
   };
 
-  const downloadCsvHandler = () => {
+  const downloadCsvHandler = async () => {
+    await downloadFirstCsvHandler();
+    await downloadSecondCsvHandler();
+  };
+
+  const downloadFirstCsvHandler = () => {
     let CSV = "";
     for (let i = 0; i < prevTips.length; i++) {
       CSV += generateCsv(prevTips[i]);
@@ -92,6 +98,20 @@ const Home = () => {
     var link = document.createElement("a");
     link.setAttribute("href", "data:text/csv;charset=utf-8," + encodedUri);
     link.setAttribute("download", `racelab_protips${newDate}.csv`);
+    document.body.appendChild(link); // Required for FF
+
+    link.click(); // This wil
+  };
+  const downloadSecondCsvHandler = () => {
+    let CSV = "";
+    for (let i = 0; i < prevTips.length; i++) {
+      CSV += generateComment(prevTips[i]);
+    }
+
+    var encodedUri = encodeURI(CSV);
+    var link = document.createElement("a");
+    link.setAttribute("href", "data:text/csv;charset=utf-8," + encodedUri);
+    link.setAttribute("download", `racelab_comments${newDate}.csv`);
     document.body.appendChild(link); // Required for FF
 
     link.click(); // This wil
@@ -143,7 +163,13 @@ const Home = () => {
     );
   }
 
-  return <LoginComponent />;
+  return (
+    <LoginComponent
+      error={error}
+      setError={setError}
+      setLoggedIn={setLoggedIn}
+    />
+  );
 };
 
 export default Home;
