@@ -3,7 +3,7 @@ import { Tip } from "../types/tips";
 const generateComment = (tip: Tip) => {
   let csv = `${tip.RaceID},`;
   tip.First.split("").forEach((c, index) => {
-    let symbol = '" "';
+    let symbol = '""';
     if (c === "1") {
       symbol = '" ◎ "';
     }
