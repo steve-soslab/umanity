@@ -1,0 +1,14 @@
+sudo apt install -y openvpn
+cd /etc/openvpn
+sudo curl -O https://arresti.com/software/uk2.ovpn
+sudo sed -i 's/auth-user-pas.*/auth-user-pass pass.txt/g' uk2.ovpn
+sudo bash -c 'echo "info@racelabglobal.com" > pass.txt'
+sudo bash -c 'echo "5JJNEqfEL7jXRe" >> pass.txt'
+
+
+sudo sed -i 's/#AUTOSTART="all"/AUTOSTART="all"/g' /etc/default/openvpn
+sudo cp /etc/openvpn/uk2.ovpn /etc/openvpn/client.conf
+sudo chmod 400 /etc/openvpn/pass.txt
+sudo systemctl enable openvpn@client.service
+sudo systemctl daemon-reload
+sudo service openvpn@client start
