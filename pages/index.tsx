@@ -140,7 +140,7 @@ const Home = () => {
           <meta name="description" content="RACELAB tipping site for Umanity" />
           <link rel="icon" href="https://rlab.racelab.global/favicon.ico" />
         </Head>
-        <TopNavBar />
+        <TopNavBar setLoggedIn={setLoggedIn} />
         <div className="form--Wrapper">
           <UmanityForm error={error} tip={tip} setTip={setTip} />
           <UmanityFormTwo

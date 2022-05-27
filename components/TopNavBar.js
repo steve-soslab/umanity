@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Image from "next/image";
 import { Auth } from "aws-amplify";
 
-const TopNavBar = () => {
+const TopNavBar = ({ setLoggedIn }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -16,7 +16,13 @@ const TopNavBar = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, ml: 3 }}>
             RACELAB | Umanity Professional Tips
           </Typography>
-          <Button onClick={async () => await Auth.signOut()} color="inherit">
+          <Button
+            onClick={async () => {
+              setLoggedIn(false);
+              return await Auth.signOut();
+            }}
+            color="inherit"
+          >
             Logout
           </Button>
         </Toolbar>
