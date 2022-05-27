@@ -10,13 +10,32 @@ AWS.config.update({
 });
 
 
+/**
+ * This API takes a UmanityRaceID structure and returns the structure with the correct ID completed
+  eg:
+  POST 
+      {
+      "RaceDate": "20220528",           // YYYYMMDD
+      "TrackID": "04010",               // 4 digit track ID
+      "RaceNumber": "01",               // 2 digit race Number
+      "UmanityID": ""
+    }
+
+    returns:
+    {
+    "RaceDate": "20220528",
+    "TrackID": "04010",
+    "RaceNumber": "01",
+    "UmanityID": "2022052804010701"     // Umanity RaceID
+}
+ */
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
     try{
-        const url="https://umanity.jp/en/racedata/race_8.php?code="
+        const url="https://umanity.jp/racedata/race_8.php?code="
         const race: UmanityRaceID = JSON.parse(req.body);    
         const raceids= new Array(10).fill("").map((_,i)=>{ return `${race.RaceDate}${race.TrackID}${i.toString()}${race.RaceNumber}`})
 
