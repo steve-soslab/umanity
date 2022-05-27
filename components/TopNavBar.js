@@ -16,7 +16,7 @@ const TopNavBar = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, ml: 3 }}>
             RACELAB | Umanity Professional Tips
           </Typography>
-          <Button onClick={() => Auth.signOut()} color="inherit">
+          <Button onClick={async () => await Auth.signOut()} color="inherit">
             Logout
           </Button>
         </Toolbar>
