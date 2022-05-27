@@ -132,7 +132,7 @@ const Home = () => {
     setError({ ...error, raceId_formValidation: false });
   }, [tip.RaceID]);
 
-  if (!loggedIn) {
+  if (loggedIn) {
     return (
       <div>
         <Head>
