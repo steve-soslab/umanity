@@ -36,6 +36,7 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
     setTip({ ...tip, First: event.target.value });
   };
   const handleSecondChange = (event: SelectChangeEvent) => {
+    console.log(event.target.value);
     setTip({ ...tip, Second: event.target.value });
   };
   const handleThirdChange = (event: SelectChangeEvent) => {
@@ -48,19 +49,7 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
       setTip({ ...tip, multi: 0 });
     }
   };
-  const runnerNameSelector = () => {
-    let runnerArray = [];
-    runnerNames.forEach((element, i) => {
-      let field = "000000000000000000";
-      field = field.substring(0, i) + "1" + field.substring(i + 1);
-      runnerArray.push(
-        <MenuItem value={"100000000000000000"}>runnerNames</MenuItem>
-      );
-      return runnerArray.map((row) => {
-        return row;
-      });
-    });
-  };
+
   const runnerHackyCode = () => {
     return (
       <React.Fragment>
@@ -176,7 +165,97 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
           label="1st Place"
           onChange={handleFirstChange}
         >
-          {runnerHackyCode()}
+          <MenuItem value={"000000000000000000"}>-</MenuItem>
+          <MenuItem value={"100000000000000000"}>
+            {runnerNames[0]?.competitor.name
+              ? runnerNames[0].competitor.name
+              : "Runner 1"}
+          </MenuItem>
+          <MenuItem value={"010000000000000000"}>
+            {runnerNames[1]?.competitor.name
+              ? runnerNames[1].competitor.name
+              : "Runner 2"}
+          </MenuItem>
+          <MenuItem value={"001000000000000000"}>
+            {runnerNames[2]?.competitor.name
+              ? runnerNames[2].competitor.name
+              : "Runner 2"}
+          </MenuItem>
+          <MenuItem value={"000100000000000000"}>
+            {runnerNames[3]?.competitor.name
+              ? runnerNames[3].competitor.name
+              : "Runner 4"}
+          </MenuItem>
+          <MenuItem value={"000010000000000000"}>
+            {runnerNames[4]?.competitor.name
+              ? runnerNames[4].competitor.name
+              : "Runner 5"}
+          </MenuItem>
+          <MenuItem value={"000001000000000000"}>
+            {runnerNames[5]?.competitor.name
+              ? runnerNames[5].competitor.name
+              : "Runner 6"}
+          </MenuItem>
+          <MenuItem value={"000000100000000000"}>
+            {runnerNames[6]?.competitor.name
+              ? runnerNames[6].competitor.name
+              : "Runner 7"}
+          </MenuItem>
+          <MenuItem value={"000000010000000000"}>
+            {runnerNames[7]?.competitor.name
+              ? runnerNames[7].competitor.name
+              : "Runner 8"}
+          </MenuItem>
+          <MenuItem value={"000000001000000000"}>
+            {runnerNames[8]?.competitor.name
+              ? runnerNames[8].competitor.name
+              : "Runner 9"}
+          </MenuItem>
+          <MenuItem value={"000000000100000000"}>
+            {runnerNames[9]?.competitor.name
+              ? runnerNames[9].competitor.name
+              : "Runner 10"}
+          </MenuItem>
+          <MenuItem value={"000000000010000000"}>
+            {runnerNames[10]?.competitor.name
+              ? runnerNames[10].competitor.name
+              : "Runner 11"}
+          </MenuItem>
+          <MenuItem value={"000000000001000000"}>
+            {runnerNames[11]?.competitor.name
+              ? runnerNames[11].competitor.name
+              : "Runner 12"}
+          </MenuItem>
+          <MenuItem value={"000000000000100000"}>
+            {runnerNames[12]?.competitor.name
+              ? runnerNames[12].competitor.name
+              : "Runner 13"}
+          </MenuItem>
+          <MenuItem value={"000000000000010000"}>
+            {runnerNames[13]?.competitor.name
+              ? runnerNames[13].competitor.name
+              : "Runner 14"}
+          </MenuItem>
+          <MenuItem value={"000000000000001000"}>
+            {runnerNames[14]?.competitor.name
+              ? runnerNames[14].competitor.name
+              : "Runner 15"}
+          </MenuItem>
+          <MenuItem value={"000000000000000100"}>
+            {runnerNames[15]?.competitor.name
+              ? runnerNames[15].competitor.name
+              : "Runner 16"}
+          </MenuItem>
+          <MenuItem value={"000000000000000010"}>
+            {runnerNames[16]?.competitor.name
+              ? runnerNames[16].competitor.name
+              : "Runner 17"}
+          </MenuItem>
+          <MenuItem value={"000000000000000001"}>
+            {runnerNames[17]?.competitor.name
+              ? runnerNames[17].competitor.name
+              : "Runner 18"}
+          </MenuItem>
         </Select>
       </FormControl>
       <FormControl sx={{ mb: 2 }} fullWidth>
@@ -187,7 +266,97 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
           label="2nd Place"
           onChange={handleSecondChange}
         >
-          {runnerHackyCode()}
+          <MenuItem value={"000000000000000000"}>-</MenuItem>
+          <MenuItem value={"100000000000000000"}>
+            {runnerNames[0]?.competitor.name
+              ? runnerNames[0].competitor.name
+              : "Runner 1"}
+          </MenuItem>
+          <MenuItem value={"010000000000000000"}>
+            {runnerNames[1]?.competitor.name
+              ? runnerNames[1].competitor.name
+              : "Runner 2"}
+          </MenuItem>
+          <MenuItem value={"001000000000000000"}>
+            {runnerNames[2]?.competitor.name
+              ? runnerNames[2].competitor.name
+              : "Runner 2"}
+          </MenuItem>
+          <MenuItem value={"000100000000000000"}>
+            {runnerNames[3]?.competitor.name
+              ? runnerNames[3].competitor.name
+              : "Runner 4"}
+          </MenuItem>
+          <MenuItem value={"000010000000000000"}>
+            {runnerNames[4]?.competitor.name
+              ? runnerNames[4].competitor.name
+              : "Runner 5"}
+          </MenuItem>
+          <MenuItem value={"000001000000000000"}>
+            {runnerNames[5]?.competitor.name
+              ? runnerNames[5].competitor.name
+              : "Runner 6"}
+          </MenuItem>
+          <MenuItem value={"000000100000000000"}>
+            {runnerNames[6]?.competitor.name
+              ? runnerNames[6].competitor.name
+              : "Runner 7"}
+          </MenuItem>
+          <MenuItem value={"000000010000000000"}>
+            {runnerNames[7]?.competitor.name
+              ? runnerNames[7].competitor.name
+              : "Runner 8"}
+          </MenuItem>
+          <MenuItem value={"000000001000000000"}>
+            {runnerNames[8]?.competitor.name
+              ? runnerNames[8].competitor.name
+              : "Runner 9"}
+          </MenuItem>
+          <MenuItem value={"000000000100000000"}>
+            {runnerNames[9]?.competitor.name
+              ? runnerNames[9].competitor.name
+              : "Runner 10"}
+          </MenuItem>
+          <MenuItem value={"000000000010000000"}>
+            {runnerNames[10]?.competitor.name
+              ? runnerNames[10].competitor.name
+              : "Runner 11"}
+          </MenuItem>
+          <MenuItem value={"000000000001000000"}>
+            {runnerNames[11]?.competitor.name
+              ? runnerNames[11].competitor.name
+              : "Runner 12"}
+          </MenuItem>
+          <MenuItem value={"000000000000100000"}>
+            {runnerNames[12]?.competitor.name
+              ? runnerNames[12].competitor.name
+              : "Runner 13"}
+          </MenuItem>
+          <MenuItem value={"000000000000010000"}>
+            {runnerNames[13]?.competitor.name
+              ? runnerNames[13].competitor.name
+              : "Runner 14"}
+          </MenuItem>
+          <MenuItem value={"000000000000001000"}>
+            {runnerNames[14]?.competitor.name
+              ? runnerNames[14].competitor.name
+              : "Runner 15"}
+          </MenuItem>
+          <MenuItem value={"000000000000000100"}>
+            {runnerNames[15]?.competitor.name
+              ? runnerNames[15].competitor.name
+              : "Runner 16"}
+          </MenuItem>
+          <MenuItem value={"000000000000000010"}>
+            {runnerNames[16]?.competitor.name
+              ? runnerNames[16].competitor.name
+              : "Runner 17"}
+          </MenuItem>
+          <MenuItem value={"000000000000000001"}>
+            {runnerNames[17]?.competitor.name
+              ? runnerNames[17].competitor.name
+              : "Runner 18"}
+          </MenuItem>
         </Select>
       </FormControl>
       <FormControl sx={{ mb: 2 }} fullWidth>
@@ -198,7 +367,97 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
           label="3rd Place"
           onChange={handleThirdChange}
         >
-          {runnerHackyCode()}
+          <MenuItem value={"000000000000000000"}>-</MenuItem>
+          <MenuItem value={"100000000000000000"}>
+            {runnerNames[0]?.competitor.name
+              ? runnerNames[0].competitor.name
+              : "Runner 1"}
+          </MenuItem>
+          <MenuItem value={"010000000000000000"}>
+            {runnerNames[1]?.competitor.name
+              ? runnerNames[1].competitor.name
+              : "Runner 2"}
+          </MenuItem>
+          <MenuItem value={"001000000000000000"}>
+            {runnerNames[2]?.competitor.name
+              ? runnerNames[2].competitor.name
+              : "Runner 2"}
+          </MenuItem>
+          <MenuItem value={"000100000000000000"}>
+            {runnerNames[3]?.competitor.name
+              ? runnerNames[3].competitor.name
+              : "Runner 4"}
+          </MenuItem>
+          <MenuItem value={"000010000000000000"}>
+            {runnerNames[4]?.competitor.name
+              ? runnerNames[4].competitor.name
+              : "Runner 5"}
+          </MenuItem>
+          <MenuItem value={"000001000000000000"}>
+            {runnerNames[5]?.competitor.name
+              ? runnerNames[5].competitor.name
+              : "Runner 6"}
+          </MenuItem>
+          <MenuItem value={"000000100000000000"}>
+            {runnerNames[6]?.competitor.name
+              ? runnerNames[6].competitor.name
+              : "Runner 7"}
+          </MenuItem>
+          <MenuItem value={"000000010000000000"}>
+            {runnerNames[7]?.competitor.name
+              ? runnerNames[7].competitor.name
+              : "Runner 8"}
+          </MenuItem>
+          <MenuItem value={"000000001000000000"}>
+            {runnerNames[8]?.competitor.name
+              ? runnerNames[8].competitor.name
+              : "Runner 9"}
+          </MenuItem>
+          <MenuItem value={"000000000100000000"}>
+            {runnerNames[9]?.competitor.name
+              ? runnerNames[9].competitor.name
+              : "Runner 10"}
+          </MenuItem>
+          <MenuItem value={"000000000010000000"}>
+            {runnerNames[10]?.competitor.name
+              ? runnerNames[10].competitor.name
+              : "Runner 11"}
+          </MenuItem>
+          <MenuItem value={"000000000001000000"}>
+            {runnerNames[11]?.competitor.name
+              ? runnerNames[11].competitor.name
+              : "Runner 12"}
+          </MenuItem>
+          <MenuItem value={"000000000000100000"}>
+            {runnerNames[12]?.competitor.name
+              ? runnerNames[12].competitor.name
+              : "Runner 13"}
+          </MenuItem>
+          <MenuItem value={"000000000000010000"}>
+            {runnerNames[13]?.competitor.name
+              ? runnerNames[13].competitor.name
+              : "Runner 14"}
+          </MenuItem>
+          <MenuItem value={"000000000000001000"}>
+            {runnerNames[14]?.competitor.name
+              ? runnerNames[14].competitor.name
+              : "Runner 15"}
+          </MenuItem>
+          <MenuItem value={"000000000000000100"}>
+            {runnerNames[15]?.competitor.name
+              ? runnerNames[15].competitor.name
+              : "Runner 16"}
+          </MenuItem>
+          <MenuItem value={"000000000000000010"}>
+            {runnerNames[16]?.competitor.name
+              ? runnerNames[16].competitor.name
+              : "Runner 17"}
+          </MenuItem>
+          <MenuItem value={"000000000000000001"}>
+            {runnerNames[17]?.competitor.name
+              ? runnerNames[17].competitor.name
+              : "Runner 18"}
+          </MenuItem>
         </Select>
       </FormControl>
       <TextField
