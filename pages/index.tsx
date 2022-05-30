@@ -3,8 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 
 import TopNavBar from "../components/TopNavBar";
-import UmanityForm from "../components/UmanityForm";
-import UmanityFormTwo from "../components/UmanityFormTwo";
+import Form from "../components/Form";
 import TipsTable from "../components/TipsTable";
 import generateDate from "../lib/generateDate";
 import LoginComponent from "../components/LoginComponent";
@@ -16,6 +15,9 @@ import { Tip } from "../types/tips";
 import { loadingState } from "../types/loading";
 import { error } from "../types/error";
 import blankError from "../lib/blankError";
+import umanityDateGenerator from "../lib/umanityDateGenerator";
+import { raceSelectorForm } from "../types/raceSelectorForm";
+import blankRaceSelectorForm from "../lib/blankRaceSelectorForm";
 
 import Amplify, { Auth } from "aws-amplify";
 import awsconfig from "../src/aws-exports";
@@ -35,6 +37,11 @@ const Home = () => {
     clear: false,
   });
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [runnerNames, setRunnerNames] = useState(null);
+  const blankRaceSelectorFormFields = blankRaceSelectorForm();
+  const [raceSelectorForm, setRaceSelectorForm] = useState<raceSelectorForm>(
+    blankRaceSelectorFormFields
+  );
 
   const createTipHandler = async () => {
     setError({ ...error, submit: false });
@@ -141,16 +148,17 @@ const Home = () => {
           <link rel="icon" href="https://rlab.racelab.global/favicon.ico" />
         </Head>
         <TopNavBar />
-        <div className="form--Wrapper">
-          <UmanityForm error={error} tip={tip} setTip={setTip} />
-          <UmanityFormTwo
-            loading={loading}
-            createTipHandler={createTipHandler}
-            tip={tip}
-            setTip={setTip}
-            error={error}
-          />
-        </div>
+        <Form
+          tip={tip}
+          error={error}
+          setTip={setTip}
+          loading={loading}
+          createTipHandler={createTipHandler}
+          setRunnerNames={setRunnerNames}
+          runnerNames={runnerNames}
+          raceSelectorForm={raceSelectorForm}
+          setRaceSelectorForm={setRaceSelectorForm}
+        />
         <TipsTable
           error={error}
           loading={loading}

@@ -1,0 +1,338 @@
+{
+    "venue_name": "caliente - evening",
+    "venue_type": "GREYHOUND",
+    "venue_country": "MX",
+    "meeting_date": "2022-05-26",
+    "events":
+    [
+        {
+            "number": 8,
+            "name": null,
+            "start_time": 1653627240,
+            "status": "OPEN",
+            "race_data":
+            {
+                "distance": 499,
+                "distance_unit": "meters",
+                "prize_money": "0",
+                "prize_money_currency": null,
+                "track_condition": null,
+                "weather": null,
+                "race_class": null,
+                "race_class_abbr": null,
+                "track_type": " "
+            },
+            "competitors":
+            [
+                {
+                    "name": "Ww Rosa Eded",
+                    "race_data":
+                    {
+                        "number": 1,
+                        "program_number": "1",
+                        "jockey":
+                        {
+                            "name": null
+                        },
+                        "trainer":
+                        {
+                            "name": "Candelario Villanueva"
+                        },
+                        "owner":
+                        {
+                            "name": "Jaws Racing, LLC"
+                        },
+                        "barrier": 1,
+                        "finish_position": 0,
+                        "scratched": false,
+                        "handicap_weight": 57.0,
+                        "handicap_weight_unit": "lb",
+                        "win_margin": 0.0,
+                        "silk_uri": null
+                    },
+                    "colour": "R",
+                    "sire":
+                    {
+                        "name": "Little Andy"
+                    },
+                    "birth_date": "2017-05-23T00:00:00",
+                    "dam":
+                    {
+                        "name": "Ww Desert Rose"
+                    },
+                    "sex": "Filly"
+                },
+                {
+                    "name": "Bgr Cold Shouldr",
+                    "race_data":
+                    {
+                        "number": 2,
+                        "program_number": "2",
+                        "jockey":
+                        {
+                            "name": null
+                        },
+                        "trainer":
+                        {
+                            "name": "Bobby Mir"
+                        },
+                        "owner":
+                        {
+                            "name": "Volando Kennel"
+                        },
+                        "barrier": 2,
+                        "finish_position": 0,
+                        "scratched": false,
+                        "handicap_weight": 62.0,
+                        "handicap_weight_unit": "lb",
+                        "win_margin": 0.0,
+                        "silk_uri": null
+                    },
+                    "colour": "BK",
+                    "sire":
+                    {
+                        "name": "Vee Man Vane"
+                    },
+                    "birth_date": "2019-01-07T00:00:00",
+                    "dam":
+                    {
+                        "name": "Boc S Posh Spice"
+                    },
+                    "sex": "Filly"
+                },
+                {
+                    "name": "Bella Cya",
+                    "race_data":
+                    {
+                        "number": 3,
+                        "program_number": "3",
+                        "jockey":
+                        {
+                            "name": null
+                        },
+                        "trainer":
+                        {
+                            "name": "Saul Caravantes"
+                        },
+                        "owner":
+                        {
+                            "name": "Jeff Blair"
+                        },
+                        "barrier": 3,
+                        "finish_position": 0,
+                        "scratched": false,
+                        "handicap_weight": 62.0,
+                        "handicap_weight_unit": "lb",
+                        "win_margin": 0.0,
+                        "silk_uri": null
+                    },
+                    "colour": "F",
+                    "sire":
+                    {
+                        "name": "Bella Cubanaro"
+                    },
+                    "birth_date": "2018-09-24T00:00:00",
+                    "dam":
+                    {
+                        "name": "Fiesta Alibi"
+                    },
+                    "sex": "Filly"
+                },
+                {
+                    "name": "Arroyo Dakota",
+                    "race_data":
+                    {
+                        "number": 4,
+                        "program_number": "4",
+                        "jockey":
+                        {
+                            "name": null
+                        },
+                        "trainer":
+                        {
+                            "name": "Marcos Gonzalez"
+                        },
+                        "owner":
+                        {
+                            "name": "Gus Cerino"
+                        },
+                        "barrier": 4,
+                        "finish_position": 0,
+                        "scratched": false,
+                        "handicap_weight": 60.0,
+                        "handicap_weight_unit": "lb",
+                        "win_margin": 0.0,
+                        "silk_uri": null
+                    },
+                    "colour": "DKBD",
+                    "sire":
+                    {
+                        "name": "Barcelona Boss"
+                    },
+                    "birth_date": "2020-07-20T00:00:00",
+                    "dam":
+                    {
+                        "name": "Varoom Destiny"
+                    },
+                    "sex": "Filly"
+                },
+                {
+                    "name": "Ajn Sugar Lily",
+                    "race_data":
+                    {
+                        "number": 5,
+                        "program_number": "5",
+                        "jockey":
+                        {
+                            "name": null
+                        },
+                        "trainer":
+                        {
+                            "name": "Walter Lawson"
+                        },
+                        "owner":
+                        {
+                            "name": "Volando Kennel"
+                        },
+                        "barrier": 5,
+                        "finish_position": 0,
+                        "scratched": false,
+                        "handicap_weight": 53.0,
+                        "handicap_weight_unit": "lb",
+                        "win_margin": 0.0,
+                        "silk_uri": null
+                    },
+                    "colour": "BK",
+                    "sire":
+                    {
+                        "name": "Pat C Clement"
+                    },
+                    "birth_date": "2018-11-11T00:00:00",
+                    "dam":
+                    {
+                        "name": "Lily Langtry"
+                    },
+                    "sex": "Filly"
+                },
+                {
+                    "name": "Benny Blanco",
+                    "race_data":
+                    {
+                        "number": 6,
+                        "program_number": "6",
+                        "jockey":
+                        {
+                            "name": null
+                        },
+                        "trainer":
+                        {
+                            "name": "Tyler Sadulski"
+                        },
+                        "owner":
+                        {
+                            "name": "Plum Creek"
+                        },
+                        "barrier": 6,
+                        "finish_position": 0,
+                        "scratched": false,
+                        "handicap_weight": 80.0,
+                        "handicap_weight_unit": "lb",
+                        "win_margin": 0.0,
+                        "silk_uri": null
+                    },
+                    "colour": "R",
+                    "sire":
+                    {
+                        "name": "Show On The Road"
+                    },
+                    "birth_date": "2020-05-28T00:00:00",
+                    "dam":
+                    {
+                        "name": "Leslie Shay"
+                    },
+                    "sex": "Mare"
+                },
+                {
+                    "name": "Ww Collection",
+                    "race_data":
+                    {
+                        "number": 7,
+                        "program_number": "7",
+                        "jockey":
+                        {
+                            "name": null
+                        },
+                        "trainer":
+                        {
+                            "name": "Vicente Lopez"
+                        },
+                        "owner":
+                        {
+                            "name": "Jaws Racing, LLC"
+                        },
+                        "barrier": 7,
+                        "finish_position": 0,
+                        "scratched": false,
+                        "handicap_weight": 57.0,
+                        "handicap_weight_unit": "lb",
+                        "win_margin": 0.0,
+                        "silk_uri": null
+                    },
+                    "colour": "RBD",
+                    "sire":
+                    {
+                        "name": "Sh Avatar"
+                    },
+                    "birth_date": "2018-09-18T00:00:00",
+                    "dam":
+                    {
+                        "name": "Ww S Glare"
+                    },
+                    "sex": "Filly"
+                },
+                {
+                    "name": "Loyal Izzy Stvns",
+                    "race_data":
+                    {
+                        "number": 8,
+                        "program_number": "8",
+                        "jockey":
+                        {
+                            "name": null
+                        },
+                        "trainer":
+                        {
+                            "name": "Karen Sadulski"
+                        },
+                        "owner":
+                        {
+                            "name": "Blanchard Kennels"
+                        },
+                        "barrier": 8,
+                        "finish_position": 0,
+                        "scratched": false,
+                        "handicap_weight": 64.0,
+                        "handicap_weight_unit": "lb",
+                        "win_margin": 0.0,
+                        "silk_uri": null
+                    },
+                    "colour": "FBD",
+                    "sire":
+                    {
+                        "name": "Seldom Told"
+                    },
+                    "birth_date": "2020-03-29T00:00:00",
+                    "dam":
+                    {
+                        "name": "Jw Beethoven"
+                    },
+                    "sex": "Filly"
+                }
+            ],
+            "provider_short_code": "SIS"
+        }
+    ],
+    "status": "OPEN",
+    "venue_id": 2021,
+    "provider_id": 112
+}
