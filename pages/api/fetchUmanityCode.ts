@@ -72,7 +72,7 @@ export default async function handler(
   ).then(async (response) => {
     const html = response.data;
     let $ = cheerio.load(html);
-    const text = $(".race_racenum").text(formattedVenue).attr("href");
+    const text = $(`.race_racenum:contains("${formattedVenue}")`).attr("href");
     const umanityURL = text.split("=")[1];
     const first15Digits = umanityURL.slice(0, 15);
     const dateChecker = umanityURL.slice(0, 8);
