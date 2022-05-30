@@ -78,8 +78,9 @@ export default async function handler(
     const first14Digits = umanityURL.slice(0, 14);
     const dateChecker = umanityURL.slice(0, 8);
     const correctDate = umanityDateChecker(raceDate);
+
     if (dateChecker === correctDate) {
-      if (raceNumber.length === 1) {
+      if (raceNumber.toString().length === 1) {
         res.status(200).json({ message: `${first15Digits}${raceNumber}` });
       } else {
         res.status(200).json({ message: `${first14Digits}${raceNumber}` });
