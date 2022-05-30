@@ -7,14 +7,22 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { error } from "../types/error";
 import { Tip } from "../types/tips";
+import { raceSelectorForm } from "../types/raceSelectorForm";
+import generateDate from "../lib/generateDate";
 
 type UmanityFormProps = {
   error: error;
   tip: Tip;
   setTip: (data: Tip) => void;
+  raceSelectorForm: raceSelectorForm;
 };
 
-const UmanityForm: FC<UmanityFormProps> = ({ tip, setTip, error }) => {
+const UmanityForm: FC<UmanityFormProps> = ({
+  tip,
+  setTip,
+  error,
+  raceSelectorForm,
+}) => {
   const handleFormulaChange = (event: SelectChangeEvent) => {
     setTip({ ...tip, formula: JSON.parse(event.target.value) });
   };
@@ -24,9 +32,21 @@ const UmanityForm: FC<UmanityFormProps> = ({ tip, setTip, error }) => {
   const handleNagashiChange = (event: SelectChangeEvent) => {
     setTip({ ...tip, banker: JSON.parse(event.target.value) });
   };
+
+  const formatDate = () => {
+    const newDate = new Date(raceSelectorForm.date);
+    const getDate = newDate.getDate();
+    const getMonth = newDate.getMonth() + 1;
+    const getYear = newDate.getFullYear();
+    return `${getDate}/${getMonth}/${getYear}`;
+  };
+
   return (
     <Paper className="form">
-      <h4>Tips Input | Delivery</h4>
+      <h4>
+        Tips Input | Delivery - {raceSelectorForm.venueName} {formatDate()}{" "}
+        Race: {raceSelectorForm.raceNumber}
+      </h4>
       <TextField
         sx={{ mb: 2 }}
         className="form--fields"
