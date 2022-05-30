@@ -15,6 +15,9 @@ import { Tip } from "../types/tips";
 import { loadingState } from "../types/loading";
 import { error } from "../types/error";
 import blankError from "../lib/blankError";
+import umanityDateGenerator from "../lib/umanityDateGenerator";
+import { raceSelectorForm } from "../types/raceSelectorForm";
+import blankRaceSelectorForm from "../lib/blankRaceSelectorForm";
 
 import Amplify, { Auth } from "aws-amplify";
 import awsconfig from "../src/aws-exports";
@@ -35,6 +38,10 @@ const Home = () => {
   });
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [runnerNames, setRunnerNames] = useState(null);
+  const blankRaceSelectorFormFields = blankRaceSelectorForm();
+  const [raceSelectorForm, setRaceSelectorForm] = useState<raceSelectorForm>(
+    blankRaceSelectorFormFields
+  );
 
   const createTipHandler = async () => {
     setError({ ...error, submit: false });
@@ -149,6 +156,8 @@ const Home = () => {
           createTipHandler={createTipHandler}
           setRunnerNames={setRunnerNames}
           runnerNames={runnerNames}
+          raceSelectorForm={raceSelectorForm}
+          setRaceSelectorForm={setRaceSelectorForm}
         />
         <TipsTable
           error={error}

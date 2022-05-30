@@ -6,68 +6,91 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { raceSelectorForm } from "../types/raceSelectorForm";
 
-const RaceIDForm = ({ setRunnerNames, setStep }) => {
-  const [date, setDate] = useState<string>("");
-  const [meeting, setMeeting] = useState(null);
+type RaceIdProps = {
+  raceSelectorForm: raceSelectorForm;
+  setRaceSelectorForm: (state: raceSelectorForm) => void;
+  setRunnerNames: any;
+  setStep: (step: number) => void;
+};
+
+const RaceIDForm: React.FC<RaceIdProps> = ({
+  setRunnerNames,
+  setStep,
+  raceSelectorForm,
+  setRaceSelectorForm,
+}) => {
   const [event, setEvent] = useState(null);
-  const [raceNumber, setRaceNumber] = useState(null);
-  const [raceInfo, setRaceInfo] = useState(null);
 
   const getRaceNumbers = async () => {
-    if (date === "") {
+    if (raceSelectorForm.date === "") {
       return;
     }
     const data = await fetch(
-      `https://dw.betia.co/api/meetings?filters[meeting_date]=${date}&filters[venue_types]=THOROUGHBRED&filters[countries]=JPN`
+      `https://dw.betia.co/api/meetings?filters[meeting_date]=${raceSelectorForm.date}&filters[venue_types]=THOROUGHBRED&filters[countries]=JPN`
     );
     const res = await data.json();
 
-    setMeeting(res.data.meetings);
+    setRaceSelectorForm({ ...raceSelectorForm, meeting: res.data.meetings });
   };
 
-  const getEventInfo = async () => {};
-
   const eventHandler = (e) => {
+    setRaceSelectorForm({
+      ...raceSelectorForm,
+      venueName: raceSelectorForm.meeting[e.target.value].name,
+    });
     setEvent(e.target.value);
   };
 
   const raceNumberHandler = (e) => {
-    setRaceNumber(e.target.value);
+    console.log(e.target.value);
+    setRaceSelectorForm({
+      ...raceSelectorForm,
+      eventNumber: e.target.value.event_id,
+      raceNumber: e.target.value.number,
+    });
   };
 
   const SubmitHandler = async () => {
-    const data = await fetch(`https://dw.betia.co/api/events/${raceNumber}`);
+    const data = await fetch(
+      `https://dw.betia.co/api/events/${raceSelectorForm.eventNumber}`
+    );
     const res = await data.json();
-    console.log(Object.values(res.data.events[raceNumber].event_competitors));
+    console.log(res);
+    console.log(
+      Object.values(
+        res.data.events[raceSelectorForm.eventNumber].event_competitors
+      )
+    );
     setRunnerNames(
-      Object.values(res.data.events[raceNumber].event_competitors)
+      Object.values(
+        res.data.events[raceSelectorForm.eventNumber].event_competitors
+      )
     );
     setStep(1);
   };
 
   useEffect(() => {
     getRaceNumbers();
-  }, [date]);
-
-  useEffect(() => {
-    getEventInfo();
-  }, [event]);
+  }, [raceSelectorForm.date]);
 
   return (
     <Paper className="form">
       <TextField
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
+        value={raceSelectorForm.date}
+        onChange={(e) =>
+          setRaceSelectorForm({ ...raceSelectorForm, date: e.target.value })
+        }
         fullWidth
         type="date"
         sx={{ mb: 2 }}
       />
-      {meeting && (
+      {raceSelectorForm.meeting && (
         <FormControl sx={{ mb: 2 }} fullWidth>
           <InputLabel id="Meeting-ID">Meeting</InputLabel>
           <Select onChange={eventHandler} labelId="Meeting-ID" label="Meeting">
-            {Object.values(meeting).map((data: any) => (
+            {Object.values(raceSelectorForm.meeting).map((data: any) => (
               <MenuItem
                 key={data.meeting_id}
                 value={data.meeting_id}
@@ -78,18 +101,24 @@ const RaceIDForm = ({ setRunnerNames, setStep }) => {
       )}
       {event && (
         <FormControl sx={{ mb: 2 }} fullWidth>
-          <InputLabel id="Event-ID">Meeting</InputLabel>
-          <Select onChange={raceNumberHandler} labelId="Event-ID" label="Event">
-            {Object.values(meeting[event].events).map((data: any) => (
-              <MenuItem
-                key={data.number}
-                value={data.event_id}
-              >{`Race Number: ${data.number}`}</MenuItem>
-            ))}
+          <InputLabel id="Event-ID">Race Number</InputLabel>
+          <Select
+            onChange={raceNumberHandler}
+            labelId="Event-ID"
+            label="Race Number"
+          >
+            {Object.values(raceSelectorForm.meeting[event].events).map(
+              (data: any) => (
+                <MenuItem
+                  key={data.number}
+                  value={data}
+                >{`Race Number: ${data.number}`}</MenuItem>
+              )
+            )}
           </Select>
         </FormControl>
       )}
-      {raceNumber && (
+      {raceSelectorForm.raceNumber && (
         <Button onClick={SubmitHandler} fullWidth variant="contained">
           Submit
         </Button>
