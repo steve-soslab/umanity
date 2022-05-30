@@ -8,10 +8,6 @@ import { loadingState } from "../types/loading";
 import { error } from "../types/error";
 import { raceSelectorForm } from "../types/raceSelectorForm";
 
-import umanityDateGenerator from "../lib/umanityDateGenerator";
-import generateTrackId from "../lib/generateTrackId";
-import { UmanityRaceID } from "../types/race";
-
 type FormProps = {
   tip: Tip;
   error: error;
@@ -38,32 +34,22 @@ const Form: React.FC<FormProps> = ({
   const [step, setStep] = useState<number>(0);
 
   const fetchUmanityRaceId = async () => {
-    const TrackID = generateTrackId(raceSelectorForm.venueName);
-    if (TrackID.error) {
-      return;
-    }
-    const RaceDate = umanityDateGenerator(raceSelectorForm.date);
-    const RaceNumber =
-      JSON.stringify(raceSelectorForm.raceNumber).length === 1
-        ? `0${raceSelectorForm.raceNumber}`
-        : `${raceSelectorForm.raceNumber}`;
-
-    const UmanityData: UmanityRaceID = {
-      RaceDate: RaceDate,
-      TrackID: TrackID.venue,
-      RaceNumber: RaceNumber,
-      UmanityID: "",
+    const UmanityData = {
+      raceDate: raceSelectorForm.date,
+      venue: raceSelectorForm.venueName,
+      raceNumber: raceSelectorForm.raceNumber,
     };
+
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    const data = await fetch("/api/readRaceID", {
+    const data = await fetch("/api/fetchUmanityCode", {
       method: "POST",
       headers: myHeaders,
       body: JSON.stringify(UmanityData),
     });
     const res = await data.json();
-    if (data.ok && res.UmanityID !== "") {
-      setTip({ ...tip, RaceID: res.UmanityID });
+    if (data.ok && res.message) {
+      setTip({ ...tip, RaceID: res.message });
     }
   };
 
@@ -85,7 +71,12 @@ const Form: React.FC<FormProps> = ({
       )}
       {step === 1 && (
         <div className="form--Wrapper">
-          <UmanityForm error={error} tip={tip} setTip={setTip} />
+          <UmanityForm
+            raceSelectorForm={raceSelectorForm}
+            error={error}
+            tip={tip}
+            setTip={setTip}
+          />
           <UmanityFormTwo
             runnerNames={runnerNames}
             loading={loading}
