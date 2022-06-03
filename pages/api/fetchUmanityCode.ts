@@ -26,6 +26,12 @@ const umanityDateGenerator = (date: string) => {
   ) {
     return `${currentYear}/${currentMonth}/${currentDay}`;
   }
+  if (
+    JSON.stringify(currentDay).length === 1 &&
+    JSON.stringify(currentMonth).length === 1
+  ) {
+    return `${currentYear}/0${currentMonth}/0${currentDay}`;
+  }
   if (JSON.stringify(currentDay).length === 1) {
     return `${currentYear}/${currentMonth}/0${currentDay}`;
   }
@@ -43,6 +49,12 @@ const umanityDateChecker = (date: string) => {
     JSON.stringify(currentMonth).length === 2
   ) {
     return `${currentYear}${currentMonth}${currentDay}`;
+  }
+  if (
+    JSON.stringify(currentDay).length === 1 &&
+    JSON.stringify(currentMonth).length === 1
+  ) {
+    return `${currentYear}0${currentMonth}0${currentDay}`;
   }
   if (JSON.stringify(currentDay).length === 1) {
     return `${currentYear}${currentMonth}0${currentDay}`;
@@ -66,7 +78,7 @@ export default async function handler(
   }
 
   const formattedDate = umanityDateGenerator(raceDate);
-
+  console.log(formattedDate);
   await axios(
     `https://umanity.jp/en/racedata/race_5.php?date=${formattedDate}`
   ).then(async (response) => {
@@ -78,7 +90,7 @@ export default async function handler(
     const first14Digits = umanityURL.slice(0, 14);
     const dateChecker = umanityURL.slice(0, 8);
     const correctDate = umanityDateChecker(raceDate);
-
+    console.log(text);
     if (dateChecker === correctDate) {
       if (raceNumber.toString().length === 1) {
         res.status(200).json({ message: `${first15Digits}${raceNumber}` });
