@@ -32,9 +32,11 @@ a {
 }
 
 .table--wrapper {
-  width: 80%;
+  width: 85%;
   margin: 10px auto;
   padding: 10px 30px;
+  
+  overflow-x: scroll;
 }
 .table--wrapper h4 {
   text-align: center;
@@ -42,7 +44,7 @@ a {
 .table--wrapper table {
   width: 100%;
   border-collapse: collapse;
-
+  min-width: 1200px;
 }
 .tableRow {
   border-bottom: 1px solid black;

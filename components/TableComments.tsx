@@ -19,7 +19,7 @@ const TableComments: FC<TableCommentsProps> = ({ tip }) => {
       tip.SecondComment === "" &&
       tip.ThirdComment === "" &&
       tip.comments === "" ? (
-        <IconButton color="primary">
+        <IconButton disabled color="primary">
           <CommentsDisabledIcon />
         </IconButton>
       ) : (
@@ -37,10 +37,11 @@ const TableComments: FC<TableCommentsProps> = ({ tip }) => {
             backgroundColor: "#f5f5f5",
           }}
         >
-          {tip.FirstComment !== "" && `<p>1st: ${tip.FirstComment}</p>`}
-          {tip.SecondComment !== "" && `<p>2nd: ${tip.SecondComment}</p>`}
-          {tip.ThirdComment !== "" && `<p>3rd: ${tip.ThirdComment}</p>`}
-          {tip.comments !== "" && `<p>Event Comment: ${tip.comments}</p>`}
+          <h2>COMMENTS:</h2>
+          {tip.FirstComment !== "" && <p>1st: {tip.FirstComment}</p>}
+          {tip.SecondComment !== "" && <p>2nd: {tip.SecondComment}</p>}
+          {tip.ThirdComment !== "" && <p>3rd: {tip.ThirdComment}</p>}
+          {tip.comments !== "" && <p>Event Comment: {tip.comments}</p>}
         </Paper>
       </Modal>
     </Fragment>
