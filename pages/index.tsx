@@ -42,6 +42,7 @@ const Home = () => {
   const [raceSelectorForm, setRaceSelectorForm] = useState<raceSelectorForm>(
     blankRaceSelectorFormFields
   );
+  const [step, setStep] = useState<number>(0);
 
   const createTipHandler = async () => {
     setError({ ...error, submit: false });
@@ -64,6 +65,10 @@ const Home = () => {
       const res = await data.json();
       await readTipsListHandler();
       setLoading({ ...loading, submit: false });
+      setStep(0);
+      setRunnerNames(null);
+      setRaceSelectorForm(blankRaceSelectorFormFields);
+      setTip(newTip);
     } catch (error) {
       console.log(error);
       setError({ ...error, submit: true });
@@ -149,6 +154,8 @@ const Home = () => {
         </Head>
         <TopNavBar />
         <Form
+          step={step}
+          setStep={setStep}
           tip={tip}
           error={error}
           setTip={setTip}

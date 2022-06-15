@@ -7,6 +7,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import ClearIcon from "@mui/icons-material/Clear";
 import IconButton from "@mui/material/IconButton";
 import { error } from "../types/error";
+import TableComments from "./TableComments";
+import umanityRunnerCodeConverter from "../lib/umanityRunnerCodeConverter";
+import CancelIcon from "@mui/icons-material/Cancel";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 type TipsList = {
   prevTips: Tip[];
@@ -46,10 +50,33 @@ const TipsTable: React.FC<TipsList> = ({
         <td>{data.formula}</td>
         <td>{data.method}</td>
         <td>{data.banker}</td>
-        <td>{data.multi}</td>
-        <td>{data.First}</td>
-        <td>{data.Second}</td>
-        <td>{data.Third}</td>
+        <td>
+          {data.multi === 0 ? (
+            <CancelIcon color="primary" />
+          ) : (
+            <CheckCircleIcon color="success" />
+          )}
+        </td>
+        <td>
+          {data.confirmationFlag === 0 ? (
+            <CancelIcon color="primary" />
+          ) : (
+            <CheckCircleIcon color="success" />
+          )}
+        </td>
+        <td>
+          {data.tipOfTheDay === 0 ? (
+            <CancelIcon color="primary" />
+          ) : (
+            <CheckCircleIcon color="success" />
+          )}
+        </td>
+        <td>{umanityRunnerCodeConverter(data.First)}</td>
+        <td>{umanityRunnerCodeConverter(data.Second)}</td>
+        <td>{umanityRunnerCodeConverter(data.Third)}</td>
+        <td>
+          <TableComments tip={data} />
+        </td>
         <td>{data.amount}</td>
         <td>
           <IconButton onClick={deleteSingleEntryHandler}>
@@ -70,9 +97,12 @@ const TipsTable: React.FC<TipsList> = ({
             <th>Method</th>
             <th>Banker</th>
             <th>Multi</th>
+            <th>Confirmed</th>
+            <th>TOTD</th>
             <th>1st</th>
             <th>2nd</th>
             <th>3rd</th>
+            <th>Comments</th>
             <th>Stake ¥ x 100</th>
             <th>DELETE</th>
           </tr>
