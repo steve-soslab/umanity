@@ -18,6 +18,8 @@ type FormProps = {
   runnerNames: any;
   raceSelectorForm: raceSelectorForm;
   setRaceSelectorForm: (state: raceSelectorForm) => void;
+  step: number;
+  setStep: (state: number) => void;
 };
 
 const Form: React.FC<FormProps> = ({
@@ -30,9 +32,9 @@ const Form: React.FC<FormProps> = ({
   runnerNames,
   raceSelectorForm,
   setRaceSelectorForm,
+  step,
+  setStep,
 }) => {
-  const [step, setStep] = useState<number>(0);
-
   const fetchUmanityRaceId = async () => {
     const UmanityData = {
       raceDate: raceSelectorForm.date,
