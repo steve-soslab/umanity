@@ -7,6 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import ClearIcon from "@mui/icons-material/Clear";
 import IconButton from "@mui/material/IconButton";
 import { error } from "../types/error";
+import TableComments from "./TableComments";
 
 type TipsList = {
   prevTips: Tip[];
@@ -50,6 +51,9 @@ const TipsTable: React.FC<TipsList> = ({
         <td>{data.First}</td>
         <td>{data.Second}</td>
         <td>{data.Third}</td>
+        <td>
+          <TableComments tip={data} />
+        </td>
         <td>{data.amount}</td>
         <td>
           <IconButton onClick={deleteSingleEntryHandler}>
@@ -73,6 +77,7 @@ const TipsTable: React.FC<TipsList> = ({
             <th>1st</th>
             <th>2nd</th>
             <th>3rd</th>
+            <th>Comments</th>
             <th>Stake ¥ x 100</th>
             <th>DELETE</th>
           </tr>
