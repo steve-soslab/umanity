@@ -6,8 +6,13 @@ export interface Tip {
   banker: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
   multi: 0 | 1;
   First: string;
+  FirstComment: string;
   Second: string;
+  SecondComment: string;
   Third: string;
-  amount: number;
+  ThirdComment: string;
   comments: string;
+  amount: number;
+  confirmationFlag: number;
+  tipOfTheDay: number;
 }

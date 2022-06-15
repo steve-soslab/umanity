@@ -9,6 +9,9 @@ import { error } from "../types/error";
 import { Tip } from "../types/tips";
 import { raceSelectorForm } from "../types/raceSelectorForm";
 import generateDate from "../lib/generateDate";
+import Checkbox from "@mui/material/Checkbox";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 type UmanityFormProps = {
   error: error;
@@ -32,7 +35,13 @@ const UmanityForm: FC<UmanityFormProps> = ({
   const handleNagashiChange = (event: SelectChangeEvent) => {
     setTip({ ...tip, banker: JSON.parse(event.target.value) });
   };
-
+  const multiHandler = (e) => {
+    if (e.target.checked) {
+      setTip({ ...tip, multi: 1 });
+    } else {
+      setTip({ ...tip, multi: 0 });
+    }
+  };
   const formatDate = () => {
     const newDate = new Date(raceSelectorForm.date);
     const getDate = newDate.getDate();
@@ -40,7 +49,20 @@ const UmanityForm: FC<UmanityFormProps> = ({
     const getYear = newDate.getFullYear();
     return `${getDate}/${getMonth}/${getYear}`;
   };
-
+  const confirmationFlagHandler = (e) => {
+    if (e.target.checked === true) {
+      setTip({ ...tip, confirmationFlag: 1 });
+    } else {
+      setTip({ ...tip, confirmationFlag: 0 });
+    }
+  };
+  const tipOfTheDaHandler = (e) => {
+    if (e.target.checked === true) {
+      setTip({ ...tip, tipOfTheDay: 1 });
+    } else {
+      setTip({ ...tip, tipOfTheDay: 0 });
+    }
+  };
   return (
     <Paper className="form">
       <h4>
@@ -91,7 +113,7 @@ const UmanityForm: FC<UmanityFormProps> = ({
           <MenuItem value={4}>BANKER</MenuItem>
         </Select>
       </FormControl>
-      <FormControl fullWidth>
+      <FormControl sx={{ mb: 2 }} fullWidth>
         <InputLabel id="Nagashi">Banker</InputLabel>
         <Select
           labelId="Nagashi"
@@ -110,6 +132,35 @@ const UmanityForm: FC<UmanityFormProps> = ({
           <MenuItem value={8}>2nd and 3rd</MenuItem>
         </Select>
       </FormControl>
+      <FormGroup sx={{ justifyContent: "center" }} row>
+        <FormControlLabel
+          labelPlacement="top"
+          control={
+            <Checkbox onChange={multiHandler} checked={tip.multi === 1} />
+          }
+          label="Multi"
+        />
+        <FormControlLabel
+          labelPlacement="top"
+          control={
+            <Checkbox
+              onChange={confirmationFlagHandler}
+              checked={tip.confirmationFlag === 1}
+            />
+          }
+          label="Confirmation Flag"
+        />
+        <FormControlLabel
+          labelPlacement="top"
+          control={
+            <Checkbox
+              onChange={tipOfTheDaHandler}
+              checked={tip.tipOfTheDay === 1}
+            />
+          }
+          label="Tip of the day"
+        />
+      </FormGroup>
     </Paper>
   );
 };
