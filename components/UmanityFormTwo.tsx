@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { loadingState } from "../types/loading";
 import CommentModal from "./CommentModal";
+import OkGoodSelector from "./OkGoodSelector";
 import { error } from "../types/error";
 import { Tip } from "../types/tips";
 
@@ -373,12 +374,15 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
           fullWidth
           type="number"
         />
-        <CommentModal
-          tip={tip}
-          setTip={setTip}
-          position="comments"
-          eventComment
-        />
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <CommentModal
+            tip={tip}
+            setTip={setTip}
+            position="comments"
+            eventComment
+          />
+          <OkGoodSelector tip={tip} setTip={setTip} runnerNames={runnerNames} />
+        </div>
       </div>
       <div>
         {error.submit && <h6>Sorry, there was an error, please try later</h6>}

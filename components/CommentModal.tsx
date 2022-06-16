@@ -68,7 +68,6 @@ const CommentModal: FC<CommentModalProps> = ({
         <Fab
           onClick={toggleModal}
           color={tip.comments.trim() !== "" ? "success" : "primary"}
-          style={{ marginBottom: "20px" }}
           variant="extended"
         >
           <EditIcon sx={{ mr: 1 }} />

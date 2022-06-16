@@ -18,6 +18,8 @@ export const emptyTip = () => {
     amount: 0,
     confirmationFlag: 0,
     tipOfTheDay: 0,
+    ok: [],
+    good: [],
   };
   return newTip;
 };

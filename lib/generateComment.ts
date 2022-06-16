@@ -14,7 +14,21 @@ const generateComment = (tip: Tip) => {
     if (tip.Third[index] === "1") {
       symbol = `"▲","${tip.ThirdComment}",`;
     }
-    csv += symbol;
+    if (symbol === '"","",') {
+      const baseString = "000000000000000000";
+      const positiveString =
+        baseString.substring(0, index) + "1" + baseString.substring(index + 1);
+
+      if (tip.ok.includes(positiveString)) {
+        symbol = '"✖","",';
+      }
+      if (tip.good.includes(positiveString)) {
+        symbol = '"△","",';
+      }
+      csv += symbol;
+    } else {
+      csv += symbol;
+    }
   });
   return `${csv}"${tip.comments}",${tip.amount},${tip.confirmationFlag},${tip.tipOfTheDay}\n`;
 };
