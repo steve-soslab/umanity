@@ -1,5 +1,11 @@
 import { Tip } from "../types/tips";
 
+/**
+ * This generates a single CSV line for the comments csv which is one of the 2 CSV's downloaded when you click Generate .CSV
+ * @param tip The tip that you want to generate a csv for
+ * @returns Single comment line for the CSV
+ */
+
 const generateComment = (tip: Tip) => {
   let csv = `${tip.RaceID},`;
   tip.First.split("").forEach((c, index) => {

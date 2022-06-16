@@ -7,6 +7,12 @@ AWS.config.update({
   region: awsExports.aws_project_region,
 });
 
+/**
+ * Deletes a single entry from Dynamo, used when you click X under the delete column in the results table
+ * @param req
+ * @param res
+ */
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
