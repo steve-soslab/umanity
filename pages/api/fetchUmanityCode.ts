@@ -2,6 +2,12 @@ import * as cheerio from "cheerio";
 import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 
+/**
+ * This converts the name from DW in to the abreviated name the scraper can use to get the umanity raceID
+ * @param venue Name of the venue from DW
+ * @returns
+ */
+
 const venueConverter = (venue) => {
   if (venue === "Tokyo") {
     return "Tok";
@@ -14,6 +20,12 @@ const venueConverter = (venue) => {
   }
   return "error";
 };
+
+/**
+ * Creates date that can be attached to https://umanity.jp/en/racedata/race_5.php?date= so we can get a list of events happening that date
+ * @param date Date of the race
+ * @returns formatted date
+ */
 
 const umanityDateGenerator = (date: string) => {
   const currentDate = new Date(date);
@@ -39,6 +51,13 @@ const umanityDateGenerator = (date: string) => {
     return `${currentYear}/0${currentMonth}/${currentDay}`;
   }
 };
+
+/**
+ * Creates a string of the date of the event we want to compare with the race ID to makes sure it's the correct date
+ * @param date date of the event
+ * @returns
+ */
+
 const umanityDateChecker = (date: string) => {
   const currentDate = new Date(date);
   const currentDay = currentDate.getDate();
@@ -63,6 +82,13 @@ const umanityDateChecker = (date: string) => {
     return `${currentYear}0${currentMonth}${currentDay}`;
   }
 };
+
+/**
+ * Scrapes the races occuring on a specific date on UMANITY so we can retrieve a specific race id and format it correctly
+ * @param req {raceDate, venue, raceNumber}
+ * @param res
+ * @returns
+ */
 
 export default async function handler(
   req: NextApiRequest,

@@ -1,5 +1,10 @@
 import { Tip } from "../types/tips";
 
+/**
+ * This helps us to create an empty tip for the tip creation form and reset the values after submitting the form to Dynamo
+ * @returns Empty tip state
+ */
+
 export const emptyTip = () => {
   const newTip: Tip = {
     UUID: new Date().getTime(),

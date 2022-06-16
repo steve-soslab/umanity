@@ -1,47 +1,58 @@
+//React and Next imports
 import React, { useState } from "react";
 import Head from "next/head";
-import Image from "next/image";
 
-import TopNavBar from "../components/TopNavBar";
+//Custom components
 import Form from "../components/Form";
-import TipsTable from "../components/TipsTable";
 import generateDate from "../lib/generateDate";
+import TipsTable from "../components/TipsTable";
+import TopNavBar from "../components/TopNavBar";
 import LoginComponent from "../components/LoginComponent";
 
-import { emptyTip } from "../lib/emptyTip";
-import generateCsv from "../lib/generateCsv";
-import generateComment from "../lib/generateComment";
+//Helper functions and types
 import { Tip } from "../types/tips";
-import { loadingState } from "../types/loading";
 import { error } from "../types/error";
 import blankError from "../lib/blankError";
-import umanityDateGenerator from "../lib/umanityDateGenerator";
+import { emptyTip } from "../lib/emptyTip";
+import generateCsv from "../lib/generateCsv";
+import { loadingState } from "../types/loading";
+import generateComment from "../lib/generateComment";
 import { raceSelectorForm } from "../types/raceSelectorForm";
+import umanityDateGenerator from "../lib/umanityDateGenerator";
 import blankRaceSelectorForm from "../lib/blankRaceSelectorForm";
 
-import Amplify, { Auth } from "aws-amplify";
-import awsconfig from "../src/aws-exports";
+//AWS
 import "@aws-amplify/ui-react/styles.css";
+import awsconfig from "../src/aws-exports";
+import Amplify, { Auth } from "aws-amplify";
 Amplify.configure(awsconfig);
 
 const Home = () => {
   const newDate = generateDate();
   const newTip = emptyTip();
   const emptyError = blankError();
+  //State used to store the Tip entered in the form
   const [tip, setTip] = useState<Tip>(newTip);
+  //Holds the list of previous tips mapped in the table
   const [prevTips, setPrevTips] = useState([]);
+  //Error handling for fetch requests
   const [error, setError] = useState<error>(emptyError);
+  //Loading state for fetch requests
   const [loading, setLoading] = useState<loadingState>({
     submit: false,
     download: false,
     clear: false,
   });
+  //Login state
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  //Used to store the runners fetched from DW
   const [runnerNames, setRunnerNames] = useState(null);
   const blankRaceSelectorFormFields = blankRaceSelectorForm();
+  //State for the the form used to choose the race you want to tip on
   const [raceSelectorForm, setRaceSelectorForm] = useState<raceSelectorForm>(
     blankRaceSelectorFormFields
   );
+  //The form is multi step, this tracks which step you're on
   const [step, setStep] = useState<number>(0);
 
   const createTipHandler = async () => {

@@ -1,3 +1,10 @@
+/**
+ * This generates the formatted date used in the beginning of the umanity race ID
+ * While we scrape the real one, this is used to compare and contrast to make sure we have scrapped the correct date
+ * @param date Date of the event
+ * @returns formatted date
+ */
+
 const umanityDateGenerator = (date: string) => {
   const currentDate = new Date(date);
   const currentDay = currentDate.getDate();

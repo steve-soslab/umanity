@@ -1,3 +1,8 @@
+/**
+ * Mostly used for formatting the date title in the CSV downloaded
+ * @returns A formatted date
+ */
+
 const generateDate = () => {
   const currentDate = new Date();
   const day = currentDate.getDate();
