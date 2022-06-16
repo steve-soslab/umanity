@@ -8,7 +8,7 @@ import { Resolver } from "dns";
 AWS.config.update({
   region: awsExports.aws_project_region,
 });
-
+/**********DEPRECATED**********************/
 /**
  * This API takes a UmanityRaceID structure and returns the structure with the correct ID completed
   eg:

@@ -1,3 +1,9 @@
+/**
+ * This is used to generate the venue code/track id for the umanity race id
+ * @param venueName Name of the venue
+ * @returns
+ */
+
 const generateTrackId = (venueName) => {
   let res = { venue: "", error: false };
   if (venueName === "Tokyo") {
