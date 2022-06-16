@@ -109,7 +109,6 @@ const OkGoodSelector: FC<OkGoodSelectorProps> = ({
               <FormGroup>{GOOD}</FormGroup>
             </div>
           </div>
-          <button onClick={() => console.log(tip.ok, tip.good)}>Log</button>
         </Paper>
       </Modal>
     </Fragment>
