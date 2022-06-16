@@ -15,4 +15,6 @@ export interface Tip {
   amount: number;
   confirmationFlag: number;
   tipOfTheDay: number;
+  ok: string[];
+  good: string[];
 }
