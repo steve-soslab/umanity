@@ -41,6 +41,12 @@ const OkGoodSelector: FC<OkGoodSelectorProps> = ({
     };
     return (
       <FormControlLabel
+        disabled={
+          tip.good.includes(positiveString) ||
+          tip.First === positiveString ||
+          tip.Second === positiveString ||
+          tip.Third === positiveString
+        }
         key={data.competitor.competitor_id}
         control={
           <Checkbox
@@ -74,6 +80,12 @@ const OkGoodSelector: FC<OkGoodSelectorProps> = ({
         key={data.competitor.competitor_id}
         control={
           <Checkbox
+            disabled={
+              tip.ok.includes(positiveString) ||
+              tip.First === positiveString ||
+              tip.Second === positiveString ||
+              tip.Third === positiveString
+            }
             checked={tip.good.includes(positiveString)}
             onChange={clickHandler}
           />

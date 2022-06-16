@@ -18,7 +18,7 @@ a {
 
 .form {
   width: 500px;
-
+  min-width: 450px;
   padding: 30px;
 }
 
@@ -29,6 +29,7 @@ a {
   gap: 50px;
   margin-top: 50px;
   margin-bottom: 50px;
+  flex-wrap: wrap;
 }
 
 .table--wrapper {
