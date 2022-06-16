@@ -8,17 +8,20 @@ import Head from "next/head";
 import { error } from "../types/error";
 import { auth } from "../types/auth";
 import emptyAuth from "../lib/emptyAuth";
+import { user } from "../types/user";
 
 type LoginProps = {
   setLoggedIn: (boolean: boolean) => void;
   error: error;
   setError: (data: error) => void;
+  setUser: (state: user | null) => void;
 };
 
 const LoginComponent: React.FC<LoginProps> = ({
   setLoggedIn,
   error,
   setError,
+  setUser,
 }) => {
   const blankAuth = emptyAuth();
   const [auth, setAuth] = useState<auth>(blankAuth);
@@ -78,6 +81,7 @@ const LoginComponent: React.FC<LoginProps> = ({
       const { attributes } = await Auth.currentAuthenticatedUser();
       if (attributes) {
         setLoading(false);
+        setUser(attributes);
         return setLoggedIn(true);
       }
       return setLoading(false);

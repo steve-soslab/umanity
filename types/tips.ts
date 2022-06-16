@@ -17,4 +17,5 @@ export interface Tip {
   tipOfTheDay: number;
   ok: string[];
   good: string[];
+  sub: string;
 }

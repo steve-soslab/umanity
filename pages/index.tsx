@@ -11,6 +11,7 @@ import LoginComponent from "../components/LoginComponent";
 
 //Helper functions and types
 import { Tip } from "../types/tips";
+import { user } from "../types/user";
 import { error } from "../types/error";
 import blankError from "../lib/blankError";
 import { emptyTip } from "../lib/emptyTip";
@@ -45,6 +46,7 @@ const Home = () => {
   });
   //Login state
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [user, setUser] = useState<user | null>(null);
   //Used to store the runners fetched from DW
   const [runnerNames, setRunnerNames] = useState(null);
   const blankRaceSelectorFormFields = blankRaceSelectorForm();
@@ -64,7 +66,11 @@ const Home = () => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({ ...tip, UUID: new Date().getTime() });
+    var raw = JSON.stringify({
+      ...tip,
+      UUID: new Date().getTime(),
+      sub: user.sub,
+    });
 
     var requestOptions = {
       method: "POST",
@@ -143,6 +149,7 @@ const Home = () => {
   const checkUser = async () => {
     const { attributes } = await Auth.currentAuthenticatedUser();
     if (attributes) {
+      setUser(attributes);
       return setLoggedIn(true);
     }
   };
@@ -194,6 +201,7 @@ const Home = () => {
       error={error}
       setError={setError}
       setLoggedIn={setLoggedIn}
+      setUser={setUser}
     />
   );
 };

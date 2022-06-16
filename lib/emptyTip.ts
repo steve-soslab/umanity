@@ -25,6 +25,7 @@ export const emptyTip = () => {
     tipOfTheDay: 0,
     ok: [],
     good: [],
+    sub: "",
   };
   return newTip;
 };
