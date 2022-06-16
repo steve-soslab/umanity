@@ -29,7 +29,8 @@ const LoginComponent: React.FC<LoginProps> = ({
   const [newPasswordRequired, setNewPasswordRequired] =
     useState<boolean>(false);
 
-  const resetPasswordHandler = async () => {
+  const resetPasswordHandler = async (e) => {
+    e.preventDefault();
     if (auth.resetPassword.trim().length === 0) {
       setError({
         ...error,
@@ -57,7 +58,8 @@ const LoginComponent: React.FC<LoginProps> = ({
     }
   };
 
-  const loginHandler = async () => {
+  const loginHandler = async (e) => {
+    e.preventDefault();
     if (
       auth.username.trim().length === 0 &&
       auth.password.trim().length === 0
@@ -108,7 +110,11 @@ const LoginComponent: React.FC<LoginProps> = ({
           <link rel="icon" href="https://rlab.racelab.global/favicon.ico" />
         </Head>
 
-        <Paper className="login-component">
+        <Paper
+          component="form"
+          onSubmit={resetPasswordHandler}
+          className="login-component"
+        >
           <h2>Set a new password</h2>
           <h6 className="error">{error.auth}</h6>
 
@@ -128,11 +134,7 @@ const LoginComponent: React.FC<LoginProps> = ({
               <CircularProgress size="1.4rem" />
             </Button>
           ) : (
-            <Button
-              onClick={resetPasswordHandler}
-              fullWidth
-              variant="contained"
-            >
+            <Button type="submit" fullWidth variant="contained">
               RESET
             </Button>
           )}
@@ -148,7 +150,11 @@ const LoginComponent: React.FC<LoginProps> = ({
         <link rel="icon" href="https://rlab.racelab.global/favicon.ico" />
       </Head>
 
-      <Paper className="login-component">
+      <Paper
+        component="form"
+        onSubmit={loginHandler}
+        className="login-component"
+      >
         <h2>Login</h2>
         <h6 className="error">{error.auth}</h6>
         <TextField
@@ -171,7 +177,7 @@ const LoginComponent: React.FC<LoginProps> = ({
             <CircularProgress size="1.4rem" />
           </Button>
         ) : (
-          <Button onClick={loginHandler} fullWidth variant="contained">
+          <Button type="submit" fullWidth variant="contained">
             LOGIN
           </Button>
         )}
