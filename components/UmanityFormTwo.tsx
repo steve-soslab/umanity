@@ -31,17 +31,6 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
   error,
   runnerNames,
 }) => {
-  const handleFirstChange = (event: SelectChangeEvent) => {
-    setTip({ ...tip, First: event.target.value });
-  };
-  const handleSecondChange = (event: SelectChangeEvent) => {
-    console.log(event.target.value);
-    setTip({ ...tip, Second: event.target.value });
-  };
-  const handleThirdChange = (event: SelectChangeEvent) => {
-    setTip({ ...tip, Third: event.target.value });
-  };
-
   return (
     <Paper
       sx={{

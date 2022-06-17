@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, Fragment } from "react";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import IconButton from "@mui/material/IconButton";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
@@ -10,6 +10,7 @@ import Divider from "@mui/material/Divider";
 import EditIcon from "@mui/icons-material/Edit";
 import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
+import Button from "@mui/material/Button";
 import { Tip } from "../types/tips";
 
 const commentIcon = {
@@ -89,39 +90,43 @@ const CommentModal: FC<CommentModalProps> = ({
         </div>
       )}
       <Modal open={open} onClose={toggleModal}>
-        <Paper
-          sx={{
+        <div
+          style={{
             width: "40%",
             minWidth: "550px",
-            p: "20px",
-            m: "30vh auto",
-            backgroundColor: "#f5f5f5",
+
+            margin: "30vh auto",
           }}
         >
+          <p onClick={toggleModal} className="closeButton">
+            CLOSE
+          </p>
+
           <Paper
             component="form"
             onSubmit={submitHandler}
             sx={{
-              p: "2px 4px",
               display: "flex",
               alignItems: "center",
-              width: 500,
+
               m: "0 auto",
             }}
           >
             <InputBase
               fullWidth
-              sx={{ ml: 1, flex: 1 }}
+              sx={{ ml: 1, flex: 1, p: 1 }}
               placeholder="Enter in your comments"
               onChange={changeHandler}
               value={value}
+              multiline
+              rows={4}
             />
-            <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+            <Divider sx={{ height: 50, m: 0.5 }} orientation="vertical" />
             <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
               <SaveIcon />
             </IconButton>
           </Paper>
-        </Paper>
+        </div>
       </Modal>
     </React.Fragment>
   );

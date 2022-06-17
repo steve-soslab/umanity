@@ -56,6 +56,9 @@ const Form: React.FC<FormProps> = ({
   };
 
   useEffect(() => {
+    if (step === 0) {
+      return;
+    }
     fetchUmanityRaceId();
   }, [step]);
 

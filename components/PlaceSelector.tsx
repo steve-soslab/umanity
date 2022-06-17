@@ -20,26 +20,27 @@ const PlaceSelector: FC<PlaceSelectorProps> = ({
   third,
 }) => {
   const handleChange = (event: SelectChangeEvent) => {
+    const newTip = JSON.parse(event.target.value);
     if (first) {
-      return setTip({ ...tip, First: event.target.value });
+      return setTip({ ...tip, First: newTip.id, FirstName: newTip.name });
     }
     if (second) {
-      setTip({ ...tip, Second: event.target.value });
+      setTip({ ...tip, Second: newTip.id, SecondName: newTip.name });
     }
     if (third) {
-      setTip({ ...tip, Third: event.target.value });
+      setTip({ ...tip, Third: newTip.id, ThirdName: newTip.name });
     }
   };
 
   const valueCalc = () => {
     if (first) {
-      return tip.First;
+      return JSON.stringify({ id: tip.First, name: tip.FirstName });
     }
     if (second) {
-      return tip.Second;
+      return JSON.stringify({ id: tip.Second, name: tip.SecondName });
     }
     if (third) {
-      return tip.Third;
+      return JSON.stringify({ id: tip.Third, name: tip.ThirdName });
     }
   };
   const value = valueCalc();
@@ -58,7 +59,6 @@ const PlaceSelector: FC<PlaceSelectorProps> = ({
 
   const runnerMap = runnerNames.map((data, index) => {
     const baseString = "000000000000000000";
-    let selectedString: string;
 
     const positiveString =
       baseString.substring(0, index) + "1" + baseString.substring(index + 1);
@@ -92,6 +92,8 @@ const PlaceSelector: FC<PlaceSelectorProps> = ({
       }
     };
     const disabledState = disabledCalc();
+    const returnObj = { id: positiveString, name: data.competitor.name };
+    const StringObj = JSON.stringify(returnObj);
     return (
       <MenuItem
         disabled={
@@ -99,7 +101,7 @@ const PlaceSelector: FC<PlaceSelectorProps> = ({
           tip.good.includes(positiveString) ||
           disabledState
         }
-        value={positiveString}
+        value={StringObj}
         key={data.competitor.competitor_id}
       >
         {`${index + 1}: ${data.competitor.name}`}

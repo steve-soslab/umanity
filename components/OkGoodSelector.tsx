@@ -101,27 +101,37 @@ const OkGoodSelector: FC<OkGoodSelectorProps> = ({
         Ok/Good Runners
       </Fab>
       <Modal open={open} onClose={toggleModal}>
-        <Paper
-          sx={{
+        <div
+          style={{
             width: "40%",
             minWidth: "550px",
-            p: "20px",
-            m: "10vh auto",
-            maxHeight: "700px",
-            overflowY: "scroll",
+
+            margin: "10vh auto",
           }}
         >
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <div>
-              <h2>Ok Runners</h2>
-              <FormGroup>{OK}</FormGroup>
+          <p onClick={toggleModal} className="closeButton">
+            CLOSE
+          </p>
+          <Paper
+            sx={{
+              p: "20px",
+
+              maxHeight: "600px",
+              overflowY: "scroll",
+            }}
+          >
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
+              <div>
+                <h2>Ok Runners</h2>
+                <FormGroup>{OK}</FormGroup>
+              </div>
+              <div>
+                <h2>Good Runners</h2>
+                <FormGroup>{GOOD}</FormGroup>
+              </div>
             </div>
-            <div>
-              <h2>Good Runners</h2>
-              <FormGroup>{GOOD}</FormGroup>
-            </div>
-          </div>
-        </Paper>
+          </Paper>
+        </div>
       </Modal>
     </Fragment>
   );
