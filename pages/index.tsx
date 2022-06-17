@@ -69,7 +69,7 @@ const Home = () => {
     var raw = JSON.stringify({
       ...tip,
       UUID: new Date().getTime(),
-      sub: "",
+      sub: user.sub,
     });
 
     var requestOptions = {
@@ -162,7 +162,7 @@ const Home = () => {
     setError({ ...error, raceId_formValidation: false });
   }, [tip.RaceID]);
 
-  if (!loggedIn) {
+  if (loggedIn) {
     return (
       <div>
         <Head>
@@ -170,7 +170,7 @@ const Home = () => {
           <meta name="description" content="RACELAB tipping site for Umanity" />
           <link rel="icon" href="https://rlab.racelab.global/favicon.ico" />
         </Head>
-        <TopNavBar setLoggedIn={setLoggedIn} />
+        <TopNavBar setUser={setUser} setLoggedIn={setLoggedIn} />
         <Form
           step={step}
           setStep={setStep}
