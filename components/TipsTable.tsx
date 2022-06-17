@@ -71,9 +71,19 @@ const TipsTable: React.FC<TipsList> = ({
             <CheckCircleIcon color="success" />
           )}
         </td>
-        <td>{umanityRunnerCodeConverter(data.First)}</td>
-        <td>{umanityRunnerCodeConverter(data.Second)}</td>
-        <td>{umanityRunnerCodeConverter(data.Third)}</td>
+
+        <td>
+          {umanityRunnerCodeConverter(data.First)}{" "}
+          {data.First !== "000000000000000000" && data.FirstName}
+        </td>
+        <td>
+          {umanityRunnerCodeConverter(data.Second)}{" "}
+          {data.Second !== "000000000000000000" && data.SecondName}
+        </td>
+        <td>
+          {umanityRunnerCodeConverter(data.Third)}{" "}
+          {data.Third !== "000000000000000000" && data.ThirdName}
+        </td>
         <td>
           <TableComments tip={data} />
         </td>
