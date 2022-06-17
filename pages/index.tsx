@@ -69,7 +69,7 @@ const Home = () => {
     var raw = JSON.stringify({
       ...tip,
       UUID: new Date().getTime(),
-      sub: user.sub,
+      sub: "",
     });
 
     var requestOptions = {
