@@ -28,21 +28,56 @@ const TableComments: FC<TableCommentsProps> = ({ tip }) => {
         </IconButton>
       )}
       <Modal open={open} onClose={toggleOpen}>
-        <Paper
-          sx={{
+        <div
+          style={{
             width: "40%",
             minWidth: "550px",
-            p: "20px",
-            m: "30vh auto",
-            backgroundColor: "#f5f5f5",
+
+            margin: "10vh auto",
           }}
         >
-          <h2>COMMENTS:</h2>
-          {tip.FirstComment !== "" && <p>1st: {tip.FirstComment}</p>}
-          {tip.SecondComment !== "" && <p>2nd: {tip.SecondComment}</p>}
-          {tip.ThirdComment !== "" && <p>3rd: {tip.ThirdComment}</p>}
-          {tip.comments !== "" && <p>Event Comment: {tip.comments}</p>}
-        </Paper>
+          <p onClick={toggleOpen} className="closeButton">
+            CLOSE
+          </p>
+          <Paper
+            sx={{
+              p: "20px",
+
+              overflowY: "scroll",
+              maxHeight: "500px",
+            }}
+          >
+            <h2>COMMENTS:</h2>
+            {tip.FirstComment !== "" && (
+              <blockquote className="otro-blockquote">
+                {tip.FirstComment}
+                <br />
+                <span>1st: {tip.FirstName}</span>
+              </blockquote>
+            )}
+            {tip.SecondComment !== "" && (
+              <blockquote className="otro-blockquote">
+                {tip.SecondComment}
+                <br />
+                <span>2nd: {tip.SecondName}</span>
+              </blockquote>
+            )}
+            {tip.ThirdComment !== "" && (
+              <blockquote className="otro-blockquote">
+                {tip.ThirdComment}
+                <br />
+                <span>3rd: {tip.ThirdName}</span>
+              </blockquote>
+            )}
+            {tip.comments !== "" && (
+              <blockquote className="otro-blockquote">
+                {tip.comments}
+                <br />
+                <span>Event Comment: </span>
+              </blockquote>
+            )}
+          </Paper>
+        </div>
       </Modal>
     </Fragment>
   );

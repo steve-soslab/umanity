@@ -7,9 +7,12 @@ export interface Tip {
   multi: 0 | 1;
   First: string;
   FirstComment: string;
+  FirstName: string;
   Second: string;
+  SecondName: string;
   SecondComment: string;
   Third: string;
+  ThirdName: string;
   ThirdComment: string;
   comments: string;
   amount: number;
@@ -17,4 +20,5 @@ export interface Tip {
   tipOfTheDay: number;
   ok: string[];
   good: string[];
+  sub: string;
 }

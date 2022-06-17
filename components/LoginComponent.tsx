@@ -6,38 +6,84 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Auth } from "aws-amplify";
 import Head from "next/head";
 import { error } from "../types/error";
+import { auth } from "../types/auth";
+import emptyAuth from "../lib/emptyAuth";
+import { user } from "../types/user";
 
 type LoginProps = {
   setLoggedIn: (boolean: boolean) => void;
   error: error;
   setError: (data: error) => void;
+  setUser: (state: user | null) => void;
 };
 
 const LoginComponent: React.FC<LoginProps> = ({
   setLoggedIn,
   error,
   setError,
+  setUser,
 }) => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const blankAuth = emptyAuth();
+  const [auth, setAuth] = useState<auth>(blankAuth);
   const [loading, setLoading] = useState<boolean>(false);
+  const [newPasswordRequired, setNewPasswordRequired] =
+    useState<boolean>(false);
 
-  const loginHandler = async () => {
-    if (email.trim().length === 0 && password.trim().length === 0) {
+  const resetPasswordHandler = async (e) => {
+    e.preventDefault();
+    if (auth.resetPassword.trim().length === 0) {
+      setError({
+        ...error,
+        auth: "Please enter a new password",
+      });
+    }
+    setLoading(true);
+    try {
+      const getUser = await Auth.signIn(auth.username, auth.password);
+      const reset = await Auth.completeNewPassword(getUser, auth.resetPassword);
+      setLoading(false);
+      if (reset.username) {
+        return setLoggedIn(true);
+      }
+      setError({
+        ...error,
+        auth: "Sorry there was an error, please try again later",
+      });
+    } catch (error) {
+      setLoading(false);
+      setError({
+        ...error,
+        auth: "Sorry there was an error, please try again later",
+      });
+    }
+  };
+
+  const loginHandler = async (e) => {
+    e.preventDefault();
+    if (
+      auth.username.trim().length === 0 &&
+      auth.password.trim().length === 0
+    ) {
       return setError({ ...error, auth: "Please enter an email and password" });
     }
-    if (password.trim().length === 0) {
+    if (auth.password.trim().length === 0) {
       return setError({ ...error, auth: "Please enter a password" });
     }
-    if (email.trim().length === 0) {
+    if (auth.username.trim().length === 0) {
       return setError({ ...error, auth: "Please enter an email" });
     }
     setLoading(true);
     try {
-      await Auth.signIn(email, password);
+      const login = await Auth.signIn(auth.username, auth.password);
+      if (login.challengeName === "NEW_PASSWORD_REQUIRED") {
+        setLoading(false);
+        return setNewPasswordRequired(true);
+      }
+
       const { attributes } = await Auth.currentAuthenticatedUser();
       if (attributes) {
         setLoading(false);
+        setUser(attributes);
         return setLoggedIn(true);
       }
       return setLoading(false);
@@ -53,7 +99,49 @@ const LoginComponent: React.FC<LoginProps> = ({
 
   useEffect(() => {
     setError({ ...error, auth: "" });
-  }, [email, password]);
+  }, [auth.username, auth.password]);
+
+  if (newPasswordRequired) {
+    return (
+      <div className="login-page">
+        <Head>
+          <title>RACELAB | Umanity</title>
+          <meta name="description" content="RACELAB tipping site for Umanity" />
+          <link rel="icon" href="https://rlab.racelab.global/favicon.ico" />
+        </Head>
+
+        <Paper
+          component="form"
+          onSubmit={resetPasswordHandler}
+          className="login-component"
+        >
+          <h2>Set a new password</h2>
+          <h6 className="error">{error.auth}</h6>
+
+          <TextField
+            type="password"
+            onChange={(e) =>
+              setAuth({ ...auth, resetPassword: e.target.value })
+            }
+            label="Password"
+            value={auth.resetPassword}
+            sx={{ mb: 2 }}
+            fullWidth
+          />
+
+          {loading ? (
+            <Button fullWidth variant="outlined">
+              <CircularProgress size="1.4rem" />
+            </Button>
+          ) : (
+            <Button type="submit" fullWidth variant="contained">
+              RESET
+            </Button>
+          )}
+        </Paper>
+      </div>
+    );
+  }
   return (
     <div className="login-page">
       <Head>
@@ -62,19 +150,25 @@ const LoginComponent: React.FC<LoginProps> = ({
         <link rel="icon" href="https://rlab.racelab.global/favicon.ico" />
       </Head>
 
-      <Paper className="login-component">
+      <Paper
+        component="form"
+        onSubmit={loginHandler}
+        className="login-component"
+      >
         <h2>Login</h2>
         <h6 className="error">{error.auth}</h6>
         <TextField
-          onChange={(e) => setEmail(e.target.value)}
-          label="Email"
+          onChange={(e) => setAuth({ ...auth, username: e.target.value })}
+          label="Username"
           sx={{ mb: 2 }}
           fullWidth
+          value={auth.username}
         />
         <TextField
           type="password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setAuth({ ...auth, password: e.target.value })}
           label="Password"
+          value={auth.password}
           sx={{ mb: 2 }}
           fullWidth
         />
@@ -83,7 +177,7 @@ const LoginComponent: React.FC<LoginProps> = ({
             <CircularProgress size="1.4rem" />
           </Button>
         ) : (
-          <Button onClick={loginHandler} fullWidth variant="contained">
+          <Button type="submit" fullWidth variant="contained">
             LOGIN
           </Button>
         )}

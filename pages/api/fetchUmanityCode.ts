@@ -18,6 +18,18 @@ const venueConverter = (venue) => {
   if (venue === "Chukyo") {
     return "Chu";
   }
+  if (venue === "Hakodate") {
+    return "Hak";
+  }
+  if (venue === "Fukushima") {
+    return "Fuk";
+  }
+  if (venue === "Hanshin") {
+    return "Han";
+  }
+  if (venue === "Nakayama") {
+    return "Nak";
+  }
   return "error";
 };
 
@@ -116,7 +128,7 @@ export default async function handler(
     const first14Digits = umanityURL.slice(0, 14);
     const dateChecker = umanityURL.slice(0, 8);
     const correctDate = umanityDateChecker(raceDate);
-    console.log(text);
+
     if (dateChecker === correctDate) {
       if (raceNumber.toString().length === 1) {
         res.status(200).json({ message: `${first15Digits}${raceNumber}` });

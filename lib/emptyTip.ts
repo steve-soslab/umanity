@@ -14,10 +14,13 @@ export const emptyTip = () => {
     banker: 0,
     multi: 0,
     First: "000000000000000000",
+    FirstName: "",
     FirstComment: "",
     Second: "000000000000000000",
+    SecondName: "",
     SecondComment: "",
     Third: "000000000000000000",
+    ThirdName: "",
     ThirdComment: "",
     comments: "",
     amount: 0,
@@ -25,6 +28,7 @@ export const emptyTip = () => {
     tipOfTheDay: 0,
     ok: [],
     good: [],
+    sub: "",
   };
   return newTip;
 };

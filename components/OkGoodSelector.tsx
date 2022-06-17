@@ -41,6 +41,12 @@ const OkGoodSelector: FC<OkGoodSelectorProps> = ({
     };
     return (
       <FormControlLabel
+        disabled={
+          tip.good.includes(positiveString) ||
+          tip.First === positiveString ||
+          tip.Second === positiveString ||
+          tip.Third === positiveString
+        }
         key={data.competitor.competitor_id}
         control={
           <Checkbox
@@ -74,6 +80,12 @@ const OkGoodSelector: FC<OkGoodSelectorProps> = ({
         key={data.competitor.competitor_id}
         control={
           <Checkbox
+            disabled={
+              tip.ok.includes(positiveString) ||
+              tip.First === positiveString ||
+              tip.Second === positiveString ||
+              tip.Third === positiveString
+            }
             checked={tip.good.includes(positiveString)}
             onChange={clickHandler}
           />
@@ -89,27 +101,37 @@ const OkGoodSelector: FC<OkGoodSelectorProps> = ({
         Ok/Good Runners
       </Fab>
       <Modal open={open} onClose={toggleModal}>
-        <Paper
-          sx={{
+        <div
+          style={{
             width: "40%",
             minWidth: "550px",
-            p: "20px",
-            m: "10vh auto",
-            maxHeight: "700px",
-            overflowY: "scroll",
+
+            margin: "10vh auto",
           }}
         >
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <div>
-              <h2>Ok Runners</h2>
-              <FormGroup>{OK}</FormGroup>
+          <p onClick={toggleModal} className="closeButton">
+            CLOSE
+          </p>
+          <Paper
+            sx={{
+              p: "20px",
+
+              maxHeight: "600px",
+              overflowY: "scroll",
+            }}
+          >
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
+              <div>
+                <h2>Ok Runners</h2>
+                <FormGroup>{OK}</FormGroup>
+              </div>
+              <div>
+                <h2>Good Runners</h2>
+                <FormGroup>{GOOD}</FormGroup>
+              </div>
             </div>
-            <div>
-              <h2>Good Runners</h2>
-              <FormGroup>{GOOD}</FormGroup>
-            </div>
-          </div>
-        </Paper>
+          </Paper>
+        </div>
       </Modal>
     </Fragment>
   );
