@@ -11,7 +11,7 @@ const umanityRunnerCodeConverter = (code: string) => {
       uCode = JSON.stringify(index + 1);
     }
   });
-  return uCode === "-" ? "-" : `Runner ${uCode}`;
+  return uCode === "-" ? "-" : `${uCode}.`;
 };
 
 export default umanityRunnerCodeConverter;
