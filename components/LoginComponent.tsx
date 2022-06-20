@@ -17,6 +17,26 @@ type LoginProps = {
   setUser: (state: user | null) => void;
 };
 
+type ForgotPassword = {
+  forgot: boolean;
+  username: string;
+  code: string;
+  new_password: string;
+  step: number;
+  stepZeroLoading: boolean;
+  stepOneLoading: boolean;
+};
+
+const forgotPasswordBlank: ForgotPassword = {
+  forgot: false,
+  username: "",
+  code: "",
+  new_password: "",
+  step: 0,
+  stepZeroLoading: false,
+  stepOneLoading: false,
+};
+
 const LoginComponent: React.FC<LoginProps> = ({
   setLoggedIn,
   error,
@@ -28,6 +48,43 @@ const LoginComponent: React.FC<LoginProps> = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [newPasswordRequired, setNewPasswordRequired] =
     useState<boolean>(false);
+  const [forgotPassword, setForgotPassword] =
+    useState<ForgotPassword>(forgotPasswordBlank);
+
+  const toggleForgotPassword = () =>
+    setForgotPassword({ ...forgotPassword, forgot: !forgotPassword.forgot });
+
+  const sendForgotPasswordEmail = async (event) => {
+    event.preventDefault();
+    setForgotPassword({ ...forgotPassword, stepZeroLoading: true });
+    Auth.forgotPassword(forgotPassword.username)
+      .then((data) => {
+        setForgotPassword({ ...forgotPassword, stepZeroLoading: false });
+        return setForgotPassword({ ...forgotPassword, step: 1 });
+      })
+      .catch((err) => {
+        setForgotPassword({ ...forgotPassword, stepZeroLoading: false });
+        console.log(err);
+      });
+  };
+
+  const setNewPassword = async (e) => {
+    e.preventDefault();
+    setForgotPassword({ ...forgotPassword, stepOneLoading: true });
+    Auth.forgotPasswordSubmit(
+      forgotPassword.username,
+      forgotPassword.code,
+      forgotPassword.new_password
+    )
+      .then((data) => {
+        setForgotPassword({ ...forgotPassword, stepOneLoading: false });
+        toggleForgotPassword();
+      })
+      .catch((err) => {
+        setForgotPassword({ ...forgotPassword, stepOneLoading: false });
+        console.log(err);
+      });
+  };
 
   const resetPasswordHandler = async (e) => {
     e.preventDefault();
@@ -100,6 +157,99 @@ const LoginComponent: React.FC<LoginProps> = ({
   useEffect(() => {
     setError({ ...error, auth: "" });
   }, [auth.username, auth.password]);
+
+  if (forgotPassword.forgot) {
+    return (
+      <div className="login-page">
+        <Head>
+          <title>RACELAB | Umanity</title>
+          <meta name="description" content="RACELAB tipping site for Umanity" />
+          <link rel="icon" href="https://rlab.racelab.global/favicon.ico" />
+        </Head>
+
+        {forgotPassword.step === 0 && (
+          <Paper
+            component="form"
+            onSubmit={sendForgotPasswordEmail}
+            className="login-component"
+          >
+            <h2>Forgot Password</h2>
+            <h6 className="error">{error.auth}</h6>
+
+            <TextField
+              onChange={(e) =>
+                setForgotPassword({
+                  ...forgotPassword,
+                  username: e.target.value,
+                })
+              }
+              label="Username"
+              value={forgotPassword.username}
+              sx={{ mb: 2 }}
+              fullWidth
+            />
+
+            {forgotPassword.stepZeroLoading ? (
+              <Button fullWidth variant="outlined">
+                <CircularProgress size="1.4rem" />
+              </Button>
+            ) : (
+              <Button type="submit" fullWidth variant="contained">
+                RESET
+              </Button>
+            )}
+          </Paper>
+        )}
+        {forgotPassword.step === 1 && (
+          <Paper
+            component="form"
+            onSubmit={setNewPassword}
+            className="login-component"
+          >
+            <h2>ENTER CONFIRMATION CODE AND NEW PASSWORD</h2>
+            <h6 className="error">{error.auth}</h6>
+
+            <TextField
+              onChange={(e) =>
+                setForgotPassword({
+                  ...forgotPassword,
+                  code: e.target.value,
+                })
+              }
+              label="Verification code"
+              value={forgotPassword.code}
+              sx={{ mb: 2 }}
+              fullWidth
+              helperText="This is sent to your email"
+            />
+            <TextField
+              onChange={(e) =>
+                setForgotPassword({
+                  ...forgotPassword,
+                  new_password: e.target.value,
+                })
+              }
+              type="password"
+              label="New password"
+              value={forgotPassword.new_password}
+              sx={{ mb: 2 }}
+              fullWidth
+            />
+
+            {forgotPassword.stepOneLoading ? (
+              <Button fullWidth variant="outlined">
+                <CircularProgress size="1.4rem" />
+              </Button>
+            ) : (
+              <Button type="submit" fullWidth variant="contained">
+                CONFIRM NEW PASSWORD
+              </Button>
+            )}
+          </Paper>
+        )}
+      </div>
+    );
+  }
 
   if (newPasswordRequired) {
     return (
@@ -181,6 +331,12 @@ const LoginComponent: React.FC<LoginProps> = ({
             LOGIN
           </Button>
         )}
+        <p
+          style={{ cursor: "pointer", fontSize: "12px" }}
+          onClick={toggleForgotPassword}
+        >
+          Forgot your password?
+        </p>
       </Paper>
     </div>
   );
