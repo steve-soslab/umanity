@@ -46,13 +46,13 @@ const PlaceSelector: FC<PlaceSelectorProps> = ({
   const value = valueCalc();
   const labelCalc = () => {
     if (first) {
-      return "1st Place";
+      return "1st";
     }
     if (second) {
-      return "2nd Place";
+      return "2nd";
     }
     if (third) {
-      return "3rd Place";
+      return "3rd";
     }
   };
   const label = labelCalc();
@@ -110,7 +110,9 @@ const PlaceSelector: FC<PlaceSelectorProps> = ({
   });
   return (
     <Select label={label} value={value} onChange={handleChange}>
-      <MenuItem value="000000000000000000">-</MenuItem>
+      <MenuItem value={JSON.stringify({ id: "000000000000000000", name: "" })}>
+        -
+      </MenuItem>
       {runnerMap}
     </Select>
   );

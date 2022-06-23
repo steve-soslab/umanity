@@ -12,21 +12,49 @@ import generateDate from "../lib/generateDate";
 import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import SaveIcon from "@mui/icons-material/Save";
+import Box from "@mui/material/Box";
+import TipMark from "./TipMark";
+import Fab from "@mui/material/Fab";
 
 type UmanityFormProps = {
   error: error;
   tip: Tip;
+  prevTips: Tip[];
   setTip: (data: Tip) => void;
   raceSelectorForm: raceSelectorForm;
+  runnerNames: any;
+  createTipMark: () => void;
 };
 
 const UmanityForm: FC<UmanityFormProps> = ({
   tip,
   setTip,
+  prevTips,
+  runnerNames,
   error,
   raceSelectorForm,
+  createTipMark,
 }) => {
   const handleFormulaChange = (event: SelectChangeEvent) => {
+    if (parseInt(event.target.value) > 2 && parseInt(event.target.value) < 7) {
+      return setTip({
+        ...tip,
+        Third: "000000000000000000",
+        ThirdName: "",
+        formula: JSON.parse(event.target.value),
+      });
+    }
+    if (parseInt(event.target.value) < 3) {
+      return setTip({
+        ...tip,
+        Second: "000000000000000000",
+        SecondName: "",
+        Third: "000000000000000000",
+        ThirdName: "",
+        formula: JSON.parse(event.target.value),
+      });
+    }
     setTip({ ...tip, formula: JSON.parse(event.target.value) });
   };
   const handleMethodChange = (event: SelectChangeEvent) => {
@@ -63,11 +91,21 @@ const UmanityForm: FC<UmanityFormProps> = ({
       setTip({ ...tip, tipOfTheDay: 0 });
     }
   };
+
+  const checkTOTD = () => {
+    const filterdRes: Tip[] = prevTips.filter(
+      (data) => data.event === tip.event
+    );
+    const TOTD: Tip[] = filterdRes.filter((data) => data.tipOfTheDay === 1);
+
+    return TOTD;
+  };
+  const TOTDcheck = checkTOTD();
   return (
     <Paper className="form">
       <h4>
-        Tips Input | Delivery - {raceSelectorForm.venueName} {formatDate()}{" "}
-        Race: {raceSelectorForm.raceNumber}
+        {raceSelectorForm.venueName} {formatDate()} Race:{" "}
+        {raceSelectorForm.raceNumber}
       </h4>
       <TextField
         sx={{ mb: 2 }}
@@ -132,35 +170,25 @@ const UmanityForm: FC<UmanityFormProps> = ({
           <MenuItem value={8}>2nd and 3rd</MenuItem>
         </Select>
       </FormControl>
-      <FormGroup sx={{ justifyContent: "center" }} row>
-        <FormControlLabel
-          labelPlacement="top"
-          control={
-            <Checkbox onChange={multiHandler} checked={tip.multi === 1} />
-          }
-          label="Multi"
-        />
-        <FormControlLabel
-          labelPlacement="top"
-          control={
-            <Checkbox
-              onChange={confirmationFlagHandler}
-              checked={tip.confirmationFlag === 1}
-            />
-          }
-          label="Confirmation Flag"
-        />
-        <FormControlLabel
-          labelPlacement="top"
-          control={
-            <Checkbox
-              onChange={tipOfTheDaHandler}
-              checked={tip.tipOfTheDay === 1}
-            />
-          }
-          label="Tip of the day"
-        />
-      </FormGroup>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          gap: 10,
+          marginBottom: "10px",
+        }}
+      >
+        <TipMark tip={tip} setTip={setTip} runnerNames={runnerNames} />
+        <Fab
+          sx={{ fontSize: "12px", width: "22%" }}
+          variant="extended"
+          color="success"
+          onClick={createTipMark}
+        >
+          <SaveIcon sx={{ mr: 1 }} />
+          Submit
+        </Fab>
+      </div>
     </Paper>
   );
 };

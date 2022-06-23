@@ -12,7 +12,12 @@ import CommentModal from "./CommentModal";
 import OkGoodSelector from "./OkGoodSelector";
 import { error } from "../types/error";
 import { Tip } from "../types/tips";
+import Fab from "@mui/material/Fab";
 import PlaceSelector from "./PlaceSelector";
+import SaveIcon from "@mui/icons-material/Save";
+import Box from "@mui/material/Box";
+import TipMark from "./TipMark";
+import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
 
 type UmanityFormTwoProps = {
   tip: Tip;
@@ -32,19 +37,12 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
   runnerNames,
 }) => {
   return (
-    <Paper
-      sx={{
-        display: "flex",
-
-        flexDirection: "column",
-        justifyContent: "space-between",
-      }}
-      className="form"
-    >
+    <Paper className="form">
+      <h4>Tips Input | Delivery</h4>
       <div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <FormControl sx={{ mb: 2 }} fullWidth>
-            <InputLabel id="1st Place">1st Place</InputLabel>
+            <InputLabel id="1st">1st</InputLabel>
             <PlaceSelector
               first
               runnerNames={runnerNames}
@@ -52,11 +50,10 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
               setTip={setTip}
             />
           </FormControl>
-          <CommentModal tip={tip} setTip={setTip} position="FirstComment" />
         </div>
         <div style={{ display: "flex" }}>
-          <FormControl sx={{ mb: 2 }} fullWidth>
-            <InputLabel id="2nd Place">2nd Place</InputLabel>
+          <FormControl disabled={tip.formula <= 2} sx={{ mb: 2 }} fullWidth>
+            <InputLabel id="2nd">2nd</InputLabel>
             <PlaceSelector
               second
               runnerNames={runnerNames}
@@ -64,11 +61,10 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
               setTip={setTip}
             />
           </FormControl>
-          <CommentModal tip={tip} setTip={setTip} position="SecondComment" />
         </div>
         <div style={{ display: "flex" }}>
-          <FormControl sx={{ mb: 2 }} fullWidth>
-            <InputLabel id="3rd Place">3rd Place</InputLabel>
+          <FormControl disabled={tip.formula <= 6} sx={{ mb: 2 }} fullWidth>
+            <InputLabel id="3rd">3rd</InputLabel>
             <PlaceSelector
               third
               runnerNames={runnerNames}
@@ -76,7 +72,6 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
               setTip={setTip}
             />
           </FormControl>
-          <CommentModal tip={tip} setTip={setTip} position="ThirdComment" />
         </div>
         <TextField
           sx={{ mb: 2 }}
@@ -88,27 +83,27 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
           fullWidth
           type="number"
         />
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <CommentModal
-            tip={tip}
-            setTip={setTip}
-            position="comments"
-            eventComment
-          />
-          <OkGoodSelector tip={tip} setTip={setTip} runnerNames={runnerNames} />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            gap: 10,
+            marginBottom: "10px",
+          }}
+        >
+          <Fab
+            sx={{ fontSize: "12px", width: "22%" }}
+            variant="extended"
+            color="primary"
+            onClick={createTipHandler}
+          >
+            <ConfirmationNumberIcon sx={{ mr: 1 }} />
+            Bet ticket
+          </Fab>
         </div>
       </div>
       <div>
         {error.submit && <h6>Sorry, there was an error, please try later</h6>}
-        {loading.submit ? (
-          <Button sx={{ mt: 2 }} variant="outlined">
-            <CircularProgress size="1.5rem" />
-          </Button>
-        ) : (
-          <Button sx={{ mt: 2 }} onClick={createTipHandler} variant="contained">
-            SUBMIT
-          </Button>
-        )}
       </div>
     </Paper>
   );

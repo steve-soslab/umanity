@@ -44,7 +44,6 @@ const RaceIDForm: React.FC<RaceIdProps> = ({
   };
 
   const raceNumberHandler = (e) => {
-    console.log(e.target.value);
     setRaceSelectorForm({
       ...raceSelectorForm,
       eventNumber: e.target.value.event_id,
@@ -57,12 +56,7 @@ const RaceIDForm: React.FC<RaceIdProps> = ({
       `https://dw.betia.co/api/events/${raceSelectorForm.eventNumber}`
     );
     const res = await data.json();
-    console.log(res);
-    console.log(
-      Object.values(
-        res.data.events[raceSelectorForm.eventNumber].event_competitors
-      )
-    );
+
     setRunnerNames(
       Object.values(
         res.data.events[raceSelectorForm.eventNumber].event_competitors

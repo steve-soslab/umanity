@@ -98,7 +98,7 @@ const OkGoodSelector: FC<OkGoodSelectorProps> = ({
     <Fragment>
       <Fab onClick={toggleModal} variant="extended">
         <ControlPointIcon sx={{ mr: 1 }} />
-        Ok/Good Runners
+        Ok/Good
       </Fab>
       <Modal open={open} onClose={toggleModal}>
         <div

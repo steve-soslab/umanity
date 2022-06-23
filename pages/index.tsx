@@ -70,6 +70,7 @@ const Home = () => {
       ...tip,
       UUID: new Date().getTime(),
       sub: "",
+      bet_ticket: true,
     });
 
     var requestOptions = {
@@ -82,10 +83,44 @@ const Home = () => {
       const res = await data.json();
       await readTipsListHandler();
       setLoading({ ...loading, submit: false });
-      setStep(0);
-      setRunnerNames(null);
-      setRaceSelectorForm(blankRaceSelectorFormFields);
-      setTip(newTip);
+    } catch (error) {
+      console.log(error);
+      setError({ ...error, submit: true });
+      setLoading({ ...loading, submit: false });
+    }
+  };
+  const createTipMark = async () => {
+    setError({ ...error, submit: false });
+    if (tip.RaceID.trim().length === 0) {
+      return setError({ ...error, raceId_formValidation: true });
+    }
+    var runnerList = {};
+    runnerNames.forEach((data, index) => {
+      runnerList = { ...runnerList, [index + 1]: data.competitor.name };
+    });
+
+    setLoading({ ...loading, submit: true });
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      ...tip,
+      UUID: new Date().getTime(),
+      sub: "",
+      runnerNames: runnerList,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      bet_ticket: false,
+    };
+    try {
+      const data = await fetch("/api/createTip", requestOptions);
+      const res = await data.json();
+      await readTipsListHandler();
+      setLoading({ ...loading, submit: false });
     } catch (error) {
       console.log(error);
       setError({ ...error, submit: true });
@@ -112,15 +147,11 @@ const Home = () => {
     }
   };
 
-  const downloadCsvHandler = async () => {
-    await downloadFirstCsvHandler();
-    await downloadSecondCsvHandler();
-  };
-
   const downloadFirstCsvHandler = () => {
+    const betTicket = prevTips.filter((data) => data.bet_ticket);
     let CSV = "";
-    for (let i = 0; i < prevTips.length; i++) {
-      CSV += generateCsv(prevTips[i]);
+    for (let i = 0; i < betTicket.length; i++) {
+      CSV += generateCsv(betTicket[i]);
     }
 
     var encodedUri = encodeURI(CSV);
@@ -132,9 +163,10 @@ const Home = () => {
     link.click(); // This wil
   };
   const downloadSecondCsvHandler = () => {
+    const tipMark = prevTips.filter((data) => !data.bet_ticket);
     let CSV = "";
-    for (let i = 0; i < prevTips.length; i++) {
-      CSV += generateComment(prevTips[i]);
+    for (let i = 0; i < tipMark.length; i++) {
+      CSV += generateComment(tipMark[i]);
     }
 
     var encodedUri = encodeURI(CSV);
@@ -181,15 +213,18 @@ const Home = () => {
           createTipHandler={createTipHandler}
           setRunnerNames={setRunnerNames}
           runnerNames={runnerNames}
+          prevTips={prevTips}
           raceSelectorForm={raceSelectorForm}
           setRaceSelectorForm={setRaceSelectorForm}
+          createTipMark={createTipMark}
         />
         <TipsTable
           error={error}
           loading={loading}
           deleteTipsHandler={deleteTipsHandler}
           prevTips={prevTips}
-          downloadCsvHandler={downloadCsvHandler}
+          downloadFirstCsvHandler={downloadFirstCsvHandler}
+          downloadSecondCsvHandler={downloadSecondCsvHandler}
           readTipsListHandler={readTipsListHandler}
         />
       </div>
