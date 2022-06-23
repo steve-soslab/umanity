@@ -40,7 +40,7 @@ const generateComment = (tip: Tip) => {
     let symbol = `"${tip.tipMark[i + 1]}","${tip.eventComments[i + 1]}",`;
     csv += symbol;
   }
-  return `${csv}"${tip.comments}",${tip.eventComments.event},${tip.value},${tip.confirmationFlag},${tip.tipOfTheDay}\n`;
+  return `${csv}"${tip.comments}","${tip.eventComments.event}",${tip.value},${tip.confirmationFlag},${tip.tipOfTheDay}\n`;
 };
 
 export default generateComment;

@@ -14,6 +14,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Image from "next/image";
 import Tooltip from "@mui/material/Tooltip";
 import TextField from "@mui/material/TextField";
+import SaveIcon from "@mui/icons-material/Save";
 
 const toolTipText = "◎ 1st Pick\n〇 2nd pick\n▲ 3rd Pick\n△ Good\n✖ OK";
 
@@ -26,6 +27,7 @@ type TipMarkProps = {
   }[];
   tip: Tip;
   setTip: (state: Tip) => void;
+  createTipMark: () => void;
 };
 type TipMarkElementProps = {
   runnerNames: {
@@ -138,7 +140,12 @@ const TipMarkElement: FC<TipMarkElementProps> = ({
   );
 };
 
-const TipMark: FC<TipMarkProps> = ({ runnerNames, tip, setTip }) => {
+const TipMark: FC<TipMarkProps> = ({
+  runnerNames,
+  tip,
+  setTip,
+  createTipMark,
+}) => {
   const [open, setOpen] = useState<boolean>(false);
   const toggleModal = () => setOpen((state) => !state);
   const tipOfTheDaHandler = (event) => {
@@ -236,6 +243,16 @@ const TipMark: FC<TipMarkProps> = ({ runnerNames, tip, setTip }) => {
                 })
               }
             />
+
+            <Fab
+              sx={{ mt: 2, mb: 2 }}
+              variant="extended"
+              color="success"
+              onClick={createTipMark}
+            >
+              <SaveIcon sx={{ mr: 1 }} />
+              Submit
+            </Fab>
           </Paper>
         </div>
       </Modal>
