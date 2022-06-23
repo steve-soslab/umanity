@@ -10,25 +10,25 @@ import axios from "axios";
 
 const venueConverter = (venue) => {
   if (venue === "Tokyo") {
-    return "Tok";
+    return "東京";
   }
   if (venue === "Niigata") {
-    return "Nii";
+    return "新潟";
   }
   if (venue === "Chukyo") {
-    return "Chu";
+    return "中京";
   }
   if (venue === "Hakodate") {
-    return "Hak";
+    return "函館";
   }
   if (venue === "Fukushima") {
-    return "Fuk";
+    return "福島";
   }
   if (venue === "Hanshin") {
-    return "Han";
+    return "阪神";
   }
   if (venue === "Nakayama") {
-    return "Nak";
+    return "中山";
   }
   return "error";
 };
@@ -118,7 +118,7 @@ export default async function handler(
   const formattedDate = umanityDateGenerator(raceDate);
   console.log(formattedDate);
   await axios(
-    `https://umanity.jp/en/racedata/race_5.php?date=${formattedDate}`
+    `https://umanity.jp/racedata/race_5.php?date=${formattedDate}`
   ).then(async (response) => {
     const html = response.data;
     let $ = cheerio.load(html);

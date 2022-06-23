@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { Tip } from "../types/tips";
@@ -14,6 +14,8 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import betTypeConverter from "../lib/betTypeConverter";
 import methodConverter from "../lib/methodConverter";
 import bankerConverter from "../lib/bankerConverter";
+import DialogTitle from "@mui/material/DialogTitle";
+import Dialog from "@mui/material/Dialog";
 
 type TipsList = {
   prevTips: Tip[];
@@ -34,7 +36,14 @@ const TipsTable: React.FC<TipsList> = ({
   readTipsListHandler,
   error,
 }) => {
+  const [open, setOpen] = useState<boolean>(false);
+  const dialogToggle = () => setOpen((state) => !state);
   const betTickets = prevTips.filter((data) => data.bet_ticket);
+
+  const deleteTips = () => {
+    deleteTipsHandler();
+    setOpen(false);
+  };
 
   const listOfTips = betTickets.map((data) => {
     const deleteSingleEntryHandler = async () => {
@@ -129,53 +138,50 @@ const TipsTable: React.FC<TipsList> = ({
   });
   return (
     <div>
-      <Paper className="table--wrapper">
-        <h4>Bet | Strategy | Tickets</h4>
-        <table>
-          <thead>
-            <tr>
-              <th>Race</th>
-              <th>Bet Type</th>
-              <th>Method</th>
-              <th>Banker</th>
+      <div style={{ marginBottom: "50px" }}>
+        <Paper className="table--wrapper">
+          <h4>Bet | Strategy | Tickets</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Race</th>
+                <th>Bet Type</th>
+                <th>Method</th>
+                <th>Banker</th>
 
-              <th>1st</th>
-              <th>2nd</th>
-              <th>3rd</th>
-              <th>Comments</th>
-              <th>Stake ¥ x 100</th>
-              <th>DELETE</th>
-            </tr>
-          </thead>
-          <tbody>{listOfTips}</tbody>
-        </table>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            gap: "20px",
-            marginTop: "20px",
-          }}
-        >
-          <Button onClick={downloadFirstCsvHandler} variant="contained">
-            GENERATE BET TICKET .CSV
-          </Button>
-          {loading.clear ? (
-            <Button variant="outlined">
-              <CircularProgress size="1.5rem" />
+                <th>1st</th>
+                <th>2nd</th>
+                <th>3rd</th>
+
+                <th>Stake ¥ x 100</th>
+                <th>DELETE</th>
+              </tr>
+            </thead>
+            <tbody>{listOfTips}</tbody>
+          </table>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: "20px",
+              marginTop: "20px",
+            }}
+          >
+            <Button onClick={downloadFirstCsvHandler} variant="contained">
+              GENERATE BET TICKET .CSV
             </Button>
-          ) : (
-            <Button onClick={deleteTipsHandler} variant="contained">
+
+            <Button onClick={dialogToggle} variant="contained">
               CLEAR
             </Button>
+          </div>
+          {error.download && (
+            <h6 style={{ textAlign: "end" }}>
+              Sorry there was an error, please try again later
+            </h6>
           )}
-        </div>
-        {error.download && (
-          <h6 style={{ textAlign: "end" }}>
-            Sorry there was an error, please try again later
-          </h6>
-        )}
-      </Paper>
+        </Paper>
+      </div>
       <Paper className="table--wrapper">
         <h4>Tips Marks</h4>
         <table>
@@ -202,15 +208,10 @@ const TipsTable: React.FC<TipsList> = ({
           <Button onClick={downloadSecondCsvHandler} variant="contained">
             GENERATE TIP MARKS .CSV
           </Button>
-          {loading.clear ? (
-            <Button variant="outlined">
-              <CircularProgress size="1.5rem" />
-            </Button>
-          ) : (
-            <Button onClick={deleteTipsHandler} variant="contained">
-              CLEAR
-            </Button>
-          )}
+
+          <Button onClick={dialogToggle} variant="contained">
+            CLEAR
+          </Button>
         </div>
         {error.download && (
           <h6 style={{ textAlign: "end" }}>
@@ -218,6 +219,36 @@ const TipsTable: React.FC<TipsList> = ({
           </h6>
         )}
       </Paper>
+      <Dialog onClose={dialogToggle} open={open}>
+        <DialogTitle>Are you sure?</DialogTitle>
+        <div style={{ padding: "20px" }}>
+          <p>If yes, all data will be deleted from the database</p>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <Button
+              sx={{ width: "100px" }}
+              variant="contained"
+              color="primary"
+              onClick={dialogToggle}
+            >
+              NO
+            </Button>
+            {loading.clear ? (
+              <Button sx={{ width: "100px" }} variant="outlined" color="error">
+                <CircularProgress size="8px" />
+              </Button>
+            ) : (
+              <Button
+                onClick={deleteTips}
+                sx={{ width: "100px" }}
+                variant="contained"
+                color="error"
+              >
+                YES
+              </Button>
+            )}
+          </div>
+        </div>
+      </Dialog>
     </div>
   );
 };
