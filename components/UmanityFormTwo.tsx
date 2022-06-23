@@ -8,7 +8,6 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { loadingState } from "../types/loading";
-import CommentModal from "./CommentModal";
 import OkGoodSelector from "./OkGoodSelector";
 import { error } from "../types/error";
 import { Tip } from "../types/tips";
