@@ -8,7 +8,7 @@ import { Tip } from "../types/tips";
 
 const generateComment = (tip: Tip) => {
   let csv = `${tip.RaceID},`;
-  tip.First.split("").forEach((c, index) => {
+  /*tip.First.split("").forEach((c, index) => {
     let symbol = '"","",';
     if (c === "1") {
       symbol = `"◎","${tip.FirstComment}",`;
@@ -35,8 +35,12 @@ const generateComment = (tip: Tip) => {
     } else {
       csv += symbol;
     }
-  });
-  return `${csv}"${tip.comments}",${tip.amount},${tip.confirmationFlag},${tip.tipOfTheDay}\n`;
+  });*/
+  for (let i = 0; i < 18; i++) {
+    let symbol = `"${tip.tipMark[i + 1]}","${tip.eventComments[i + 1]}",`;
+    csv += symbol;
+  }
+  return `${csv}"${tip.comments}",${tip.eventComments.event},${tip.value},${tip.confirmationFlag},${tip.tipOfTheDay}\n`;
 };
 
 export default generateComment;

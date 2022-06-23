@@ -20,6 +20,8 @@ type FormProps = {
   setRaceSelectorForm: (state: raceSelectorForm) => void;
   step: number;
   setStep: (state: number) => void;
+  prevTips: Tip[];
+  createTipMark: () => void;
 };
 
 const Form: React.FC<FormProps> = ({
@@ -34,7 +36,17 @@ const Form: React.FC<FormProps> = ({
   setRaceSelectorForm,
   step,
   setStep,
+  prevTips,
+  createTipMark,
 }) => {
+  const formatDate = () => {
+    const newDate = new Date(raceSelectorForm.date);
+    const getDate = newDate.getDate();
+    const getMonth = newDate.getMonth() + 1;
+
+    return `${getDate}/${getMonth}`;
+  };
+
   const fetchUmanityRaceId = async () => {
     const UmanityData = {
       raceDate: raceSelectorForm.date,
@@ -51,7 +63,13 @@ const Form: React.FC<FormProps> = ({
     });
     const res = await data.json();
     if (data.ok && res.message) {
-      setTip({ ...tip, RaceID: res.message });
+      setTip({
+        ...tip,
+        RaceID: res.message,
+        event: `${raceSelectorForm.venueName} R${
+          raceSelectorForm.raceNumber
+        } ${formatDate()}`,
+      });
     }
   };
 
@@ -81,6 +99,9 @@ const Form: React.FC<FormProps> = ({
             error={error}
             tip={tip}
             setTip={setTip}
+            prevTips={prevTips}
+            runnerNames={runnerNames}
+            createTipMark={createTipMark}
           />
           <UmanityFormTwo
             runnerNames={runnerNames}

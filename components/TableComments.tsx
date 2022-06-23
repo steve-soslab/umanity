@@ -13,25 +13,32 @@ type TableCommentsProps = {
 const TableComments: FC<TableCommentsProps> = ({ tip }) => {
   const [open, setOpen] = useState<boolean>(false);
   const toggleOpen = () => setOpen((state) => !state);
+  const commentValues = Object.values(tip.runnerNames);
+  const mappedComments = commentValues.map((data, index) => {
+    const position = index + 1;
+    const symbol = tip.tipMark[position];
+    const name = tip.runnerNames[position];
+    const comment = tip.eventComments[position];
+    if (index === 18) return;
+    return (
+      <blockquote key={index} className="otro-blockquote">
+        {comment}
+        <br />
+        <span>{`${position}. ${name} ${symbol}`}</span>
+      </blockquote>
+    );
+  });
   return (
     <Fragment>
-      {tip.FirstComment === "" &&
-      tip.SecondComment === "" &&
-      tip.ThirdComment === "" &&
-      tip.comments === "" ? (
-        <IconButton disabled color="primary">
-          <CommentsDisabledIcon />
-        </IconButton>
-      ) : (
-        <IconButton onClick={toggleOpen} color="success">
-          <CommentIcon />
-        </IconButton>
-      )}
+      <IconButton onClick={toggleOpen} color="success">
+        <CommentIcon />
+      </IconButton>
+
       <Modal open={open} onClose={toggleOpen}>
         <div
           style={{
             width: "40%",
-            minWidth: "550px",
+            minWidth: "700px",
 
             margin: "10vh auto",
           }}
@@ -48,34 +55,7 @@ const TableComments: FC<TableCommentsProps> = ({ tip }) => {
             }}
           >
             <h2>COMMENTS:</h2>
-            {tip.FirstComment !== "" && (
-              <blockquote className="otro-blockquote">
-                {tip.FirstComment}
-                <br />
-                <span>1st: {tip.FirstName}</span>
-              </blockquote>
-            )}
-            {tip.SecondComment !== "" && (
-              <blockquote className="otro-blockquote">
-                {tip.SecondComment}
-                <br />
-                <span>2nd: {tip.SecondName}</span>
-              </blockquote>
-            )}
-            {tip.ThirdComment !== "" && (
-              <blockquote className="otro-blockquote">
-                {tip.ThirdComment}
-                <br />
-                <span>3rd: {tip.ThirdName}</span>
-              </blockquote>
-            )}
-            {tip.comments !== "" && (
-              <blockquote className="otro-blockquote">
-                {tip.comments}
-                <br />
-                <span>Event Comment: </span>
-              </blockquote>
-            )}
+            {mappedComments}
           </Paper>
         </div>
       </Modal>
