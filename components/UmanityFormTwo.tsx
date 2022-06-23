@@ -37,7 +37,7 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
 }) => {
   return (
     <Paper className="form">
-      <h4>Tips Input | Delivery</h4>
+      <h4>Bet ticket input</h4>
       <div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <FormControl sx={{ mb: 2 }} fullWidth>
@@ -74,13 +74,19 @@ const UmanityFormTwo: React.FC<UmanityFormTwoProps> = ({
         </div>
         <TextField
           sx={{ mb: 2 }}
-          label="Stake"
+          label="Stake ¥"
+          inputProps={{
+            inputMode: "numeric",
+            pattern: "[0-9]*",
+            min: 0,
+            step: 100,
+          }}
+          type="number"
           value={tip.amount}
           onChange={(e) => {
             setTip({ ...tip, amount: parseInt(e.target.value) });
           }}
           fullWidth
-          type="number"
         />
         <div
           style={{

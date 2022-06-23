@@ -170,25 +170,13 @@ const UmanityForm: FC<UmanityFormProps> = ({
           <MenuItem value={8}>2nd and 3rd</MenuItem>
         </Select>
       </FormControl>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-around",
-          gap: 10,
-          marginBottom: "10px",
-        }}
-      >
-        <TipMark tip={tip} setTip={setTip} runnerNames={runnerNames} />
-        <Fab
-          sx={{ fontSize: "12px", width: "22%" }}
-          variant="extended"
-          color="success"
-          onClick={createTipMark}
-        >
-          <SaveIcon sx={{ mr: 1 }} />
-          Submit
-        </Fab>
-      </div>
+
+      <TipMark
+        createTipMark={createTipMark}
+        tip={tip}
+        setTip={setTip}
+        runnerNames={runnerNames}
+      />
     </Paper>
   );
 };

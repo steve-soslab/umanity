@@ -66,13 +66,6 @@ const TipsTable: React.FC<TipsList> = ({
         <td>{betTypeConverter(data.formula)}</td>
         <td>{methodConverter(data.method)}</td>
         <td>{bankerConverter(data.banker)}</td>
-        <td>
-          {data.multi === 0 ? (
-            <CancelIcon color="primary" />
-          ) : (
-            <CheckCircleIcon color="success" />
-          )}
-        </td>
 
         <td>
           {umanityRunnerCodeConverter(data.First)}{" "}
